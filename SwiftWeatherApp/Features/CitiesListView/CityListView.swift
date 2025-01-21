@@ -13,11 +13,23 @@ struct CitiesListView: View {
     
     @State private var searchQuery: String = ""
     
+    @State private var isShowSplash = true
+    
     var isSearching: Bool {
         !searchQuery.isEmpty
     }
 
     var body: some View {
+        
+        if isShowSplash {
+            SplashScreen()
+                .onAppear{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                        isShowSplash = false
+                    }
+                }
+        }
+        else{
         NavigationStack {
             List {
                 ScrollView {
@@ -60,6 +72,7 @@ struct CitiesListView: View {
                 }
             }
         }
+    }
     }
 }
 
