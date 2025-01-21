@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUICore
 
 struct Forecast: Codable {
     let cities: [City]
@@ -24,7 +25,8 @@ struct Location: Codable, Hashable {
     let longitude: Double
 }
 
-struct Weather: Codable, Hashable {
+struct Weather: Codable, Hashable, Identifiable {
+    var id: String { day }
     let day: String
     let hourly: [HourlyWeather]
 }
@@ -39,6 +41,19 @@ struct HourlyWeather: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case hour, temperature, condition, humidity
         case windSpeed = "wind_speed" // el json viene así, para no modificar el json coloco esto [Julián]
+    }
+    
+    func getConditionIcon() -> Image {
+        switch condition.lowercased() {
+        case "clear", "sunny":
+            return Image("sunny")
+        case "cloudy":
+            return Image("cloud")
+        case "rainy":
+            return Image("rainy")
+        default:
+            return Image("cloudy")
+        }
     }
 }
 

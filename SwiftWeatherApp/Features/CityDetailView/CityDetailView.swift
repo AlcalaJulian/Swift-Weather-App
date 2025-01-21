@@ -9,20 +9,49 @@ import SwiftUI
 
 struct CityDetailView: View {
     @State private var viewModel: CityDetailViewModel
+    @State private var isSHowingMap = false
     
     init(city: City) {
         _viewModel = State(wrappedValue: CityDetailViewModel(city: city))
     }
     
     var body: some View {
-        List {
-            CurrentTimeHeaderSectionView(viewModel:viewModel)
-            CurrentTimeSectionView(viewModel:viewModel)
-            WeatherListSectionView(viewModel:viewModel)
+        VStack{
+            List {
+                CurrentTimeHeaderSectionView(viewModel:viewModel)
+                CurrentTimeSectionView(hourlyWeather: viewModel.hourlyWeather, currentDay: viewModel.currentDay, currentDate: viewModel.currentDate)
+                WeatherListSectionView(viewModel:viewModel)
+            }
+            .navigationTitle(viewModel.navigationTitle)
+            .sheet(isPresented: $isSHowingMap) {
+                ZStack{
+                    MapView(city: viewModel.city)
+                        .ignoresSafeArea()
+                    VStack{
+                        Spacer()
+                        MapCard(viewModel: viewModel)
+                            .shadow(color: .black.opacity(0.7), radius: 20)
+                            .padding()
+                    }
+                }
+                
+                .ignoresSafeArea()
+                .overlay(alignment: .topLeading) {
+                    BackButtonView(onClick: { isSHowingMap.toggle() })
+                }
+                
+            }
+            
+            
+            Button{
+                isSHowingMap = true
+            } label: {
+                Text("Show map📍")
+            }.frame(width: 300)
         }
-        .navigationTitle(viewModel.navigationTitle)
     }
 }
+
 
 
 #Preview {

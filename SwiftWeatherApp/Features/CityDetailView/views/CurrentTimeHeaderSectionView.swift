@@ -12,9 +12,9 @@ struct CurrentTimeHeaderSectionView: View {
     var body: some View {
         Section {
             VStack {
-                viewModel.getConditionIcon(for: viewModel.currentCondition)
+                viewModel.currentWeather?.getConditionIcon()
                     .resizable()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 120, height: 120)
                 Text(viewModel.currentTemperature)
                     .font(.system(size: 58))
                 Text(viewModel.currentCondition)

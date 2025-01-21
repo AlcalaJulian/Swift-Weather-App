@@ -7,18 +7,19 @@
 
 import SwiftUI
 struct HourlyWeatherScrollView: View {
-    @State var viewModel: CityDetailViewModel
+    //@State var viewModel: CityDetailViewModel
+    @State var hourlyWeather: [HourlyWeather]
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(viewModel.hourlyWeather, id: \.self) { hourlyWeather in
+                ForEach(hourlyWeather, id: \.self) { hourlyWeather in
                     VStack(spacing: 5) {
                         Text(hourlyWeather.hour)
                             .font(.caption)
                             .bold()
                         Text("\(hourlyWeather.temperature)°C")
                             .font(.title3)
-                        viewModel.getConditionIcon(for: hourlyWeather.condition)
+                        hourlyWeather.getConditionIcon()
                             .resizable()
                             .frame(width: 20, height: 20)
                         Text(hourlyWeather.condition)

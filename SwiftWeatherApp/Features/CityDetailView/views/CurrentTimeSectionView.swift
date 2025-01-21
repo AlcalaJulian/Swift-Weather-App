@@ -7,17 +7,21 @@
 import SwiftUI
 
 struct CurrentTimeSectionView: View {
-    @State var viewModel: CityDetailViewModel
+    //@State var viewModel: CityDetailViewModel
+    var hourlyWeather:[HourlyWeather]
+    var currentDay: String
+    var currentDate: String
+    
     var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
-                    Text(viewModel.currentDay)
+                    Text(currentDay)
                         .font(.headline)
                     Spacer()
-                    Text(viewModel.currentDate)
+                    Text(currentDate)
                 }
-                HourlyWeatherScrollView(viewModel: viewModel)
+                HourlyWeatherScrollView(hourlyWeather: hourlyWeather)
             }
         }
     }

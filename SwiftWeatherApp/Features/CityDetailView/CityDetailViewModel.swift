@@ -12,6 +12,7 @@ import SwiftUI
 class CityDetailViewModel: ObservableObject {
     var isExpanded = true
     var isOtherDaysExpanded = false
+    var selectedOtherDay: Weather?
     
     let city: City
     
@@ -90,8 +91,7 @@ class CityDetailViewModel: ObservableObject {
         
         return weekdaySymbols[weekdayIndex]
     }
-    func handleWeatherTap(for weather: Weather) {
-           
-        // TODO
-       }
+    func handleWeatherTap(for weather: Weather?) {
+        selectedOtherDay = weather
+    }
 }
