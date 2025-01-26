@@ -45,14 +45,14 @@ struct HourlyWeather: Codable, Hashable {
     
     func getConditionIcon() -> Image {
         switch condition.lowercased() {
-        case "clear", "sunny":
+        case "sunny":
             return Image("sunny")
         case "cloudy":
             return Image("cloud")
         case "rainy":
             return Image("rainy")
         default:
-            return Image("cloudy")
+            return Image("clear")
         }
     }
 }
