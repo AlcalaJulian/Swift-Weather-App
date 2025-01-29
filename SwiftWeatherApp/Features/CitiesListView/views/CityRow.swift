@@ -4,6 +4,7 @@
 //
 //  Created by Julián Alcalá Forero on 18/1/25.
 //
+
 import SwiftUI
 
 struct CityRow: View {
@@ -32,23 +33,23 @@ struct CityRow: View {
     }
 }
 
-/// Vista principal con el diseño mejorado
 struct CityRowContentView: View {
     let city: City
     let condition: String
     let firstTemp: Double
     let maxTemp: Double
     let minTemp: Double
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
                 Text(city.city)
                     .font(.system(size: 22))
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                 Text(condition)
                     .font(.system(size: 16))
-                    .foregroundColor(.black.opacity(0.9))
+                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.9))
             }
             .padding(.leading, 16)
             
@@ -57,11 +58,11 @@ struct CityRowContentView: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text("\(firstTemp, specifier: "%.0f")°")
                     .font(.system(size: 48))
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                 
                 Text("Máx: \(maxTemp, specifier: "%.0f")°  •  Mín: \(minTemp, specifier: "%.0f")°")
                     .font(.system(size: 14))
-                    .foregroundColor(.black.opacity(0.85))
+                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
             }
             .padding(.trailing, 16)
         }
@@ -69,8 +70,8 @@ struct CityRowContentView: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color.blue.opacity(0.4),
-                    Color(.lightGray).opacity(0.7)
+                    colorScheme == .dark ? Color.blue.opacity(0.6) : Color.blue.opacity(0.4),
+                    colorScheme == .dark ? Color.gray.opacity(0.7) : Color(.lightGray).opacity(0.7)
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -82,19 +83,20 @@ struct CityRowContentView: View {
 
 struct CityRowFallbackView: View {
     let city: City
-    
+    @Environment(\.colorScheme) var colorScheme 
+
     var body: some View {
         HStack {
             Text(city.city)
                 .font(.headline)
-                .foregroundColor(.gray)
+                .foregroundColor(colorScheme == .dark ? .white : .gray)
             Spacer()
             Text("Sin datos meteorológicos")
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(colorScheme == .dark ? .white : .gray)
         }
         .padding()
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color.black.opacity(0.8) : Color.white)
         .cornerRadius(8)
         .shadow(radius: 2)
     }
