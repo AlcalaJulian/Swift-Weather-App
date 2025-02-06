@@ -9,19 +9,34 @@ import SwiftUI
 
 struct MapCard: View {
     
-    var viewModel: CityDetailViewModel
+    var city: City
     
     var body: some View{
         VStack{
             HStack{
                 
                 ZStack{
-                    viewModel.currentWeather?.getConditionIcon()
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(10)
-                        .background(.white)
+                    if let temp = city.getCurrentWeatherHour()?.temperature{
+                        Image(systemName: "\(temp).square.fill")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
+                            .background(.white)
+                        }
+                    else
+                        {
+                            city.getCurrentWeatherHour()?
+                                .getConditionIcon()
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10)
+                                .background(.white)
+                        }
+                    
+                    
+                        
                 }
                 .padding(6)
                 .background(.white)
@@ -30,14 +45,14 @@ struct MapCard: View {
                 
                 VStack{
                     
-                        Text(viewModel.city.city)
+                        Text(city.city)
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundStyle(.blue)
                         
-                            Text("Latitude: " + String(viewModel.city.location.latitude))
+                            Text("Latitude: " + String(city.location.latitude))
                                 .font(.subheadline)
-                            Text("Longitude: " + String(viewModel.city.location.longitude))
+                            Text("Longitude: " + String(city.location.longitude))
                                 .font(.subheadline)
                     }
                 

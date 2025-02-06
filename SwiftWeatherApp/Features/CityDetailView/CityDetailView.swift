@@ -22,13 +22,6 @@ struct CityDetailView: View {
                 CurrentTimeSectionView(hourlyWeather: viewModel.hourlyWeather, currentDay: viewModel.currentDay, currentDate: viewModel.currentDate)
                 WeatherListSectionView(viewModel:viewModel)
                 
-                Section{
-                    Button{
-                        isSHowingMap = true
-                    } label: {
-                        Text("Show map📍")
-                    }.frame(width: 300)
-                }
             }
             .navigationTitle(viewModel.navigationTitle)
             .sheet(item: $viewModel.selectedOtherDay){ day in
@@ -70,7 +63,7 @@ struct CityDetailView: View {
                         .ignoresSafeArea()
                     VStack{
                         Spacer()
-                        MapCard(viewModel: viewModel)
+                        MapCard(city: viewModel.city)
                             .shadow(color: .black.opacity(0.7), radius: 20)
                             .padding()
                     }

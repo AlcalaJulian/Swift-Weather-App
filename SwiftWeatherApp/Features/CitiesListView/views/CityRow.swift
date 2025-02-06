@@ -25,10 +25,10 @@ struct CityRow: View {
                             maxTemp: Double(maxTemp),
                             minTemp: Double(minTemp))
             } else {
-                CityRowFallbackView(city: city)
+                CityRowFallbackView(city: city.city)
             }
         } else {
-            CityRowFallbackView(city: city)
+            CityRowFallbackView(city: city.city)
         }
     }
 }
@@ -82,12 +82,12 @@ struct CityRowContentView: View {
 }
 
 struct CityRowFallbackView: View {
-    let city: City
-    @Environment(\.colorScheme) var colorScheme 
+    let city: String
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         HStack {
-            Text(city.city)
+            Text(city)
                 .font(.headline)
                 .foregroundColor(colorScheme == .dark ? .white : .gray)
             Spacer()

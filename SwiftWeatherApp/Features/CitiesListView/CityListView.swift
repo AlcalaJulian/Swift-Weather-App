@@ -18,6 +18,8 @@ struct CitiesListView: View {
     var isSearching: Bool {
         !searchQuery.isEmpty
     }
+    
+    @State var path = NavigationPath()
 
     var body: some View {
         
@@ -30,7 +32,7 @@ struct CitiesListView: View {
                 }
         }
         else{
-        NavigationStack {
+            NavigationStack(path: $path) {
             List {
                 ScrollView {
                     if isSearching {
@@ -50,7 +52,9 @@ struct CitiesListView: View {
             }
             .navigationTitle("Time")
             .navigationDestination(for: City.self) { city in
-                CityDetailView(city: city)
+//               CityDetailView(city: city)
+                CityTabView(currentcity: city, onBack:{ path.removeLast()
+                })
             }
             .scrollContentBackground(.hidden)
             .searchable(

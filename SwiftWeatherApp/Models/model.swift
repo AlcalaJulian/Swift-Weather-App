@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUICore
+import MapKit
 
 struct Forecast: Codable {
     let cities: [City]
@@ -18,6 +19,28 @@ struct City: Codable, Hashable, Identifiable {
     let city: String
     let location: Location
     let weather: [Weather]
+    
+    func getCLLocation() -> CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+    }
+    
+    
+    func getCurrentWeatherHour() -> HourlyWeather? {
+        
+        let now = Date.now
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let dateString = dateFormatter.string(from: now)
+        
+        let currentWeather = weather.first { $0.day == dateString } ?? weather.first
+        
+        dateFormatter.dateFormat = "hh:mm"
+        let hour = dateFormatter.string(from: now)
+        
+        return currentWeather?.hourly.first { $0.hour == hour } ?? currentWeather?.hourly.first
+    }
 }
 
 struct Location: Codable, Hashable {

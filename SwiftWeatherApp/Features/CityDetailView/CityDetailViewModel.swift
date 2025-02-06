@@ -25,7 +25,8 @@ class CityDetailViewModel: ObservableObject {
     }
     
     var currentWeather: HourlyWeather? {
-        city.weather.first?.hourly.first
+        
+        city.getCurrentWeatherHour()
     }
     
     var currentTemperature: String {
