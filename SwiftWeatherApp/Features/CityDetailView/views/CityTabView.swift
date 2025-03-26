@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CityTabView: View {
-    @State private var currentcity: City
+    @State private var currentcity: CityDto
     @State private var selected: String = ""
     
     private var backAction: () -> Void
@@ -16,7 +16,7 @@ struct CityTabView: View {
     private var viewModel = CitiesListViewModel()
     @State private var isSHowingMap = false
     
-    init(currentcity: City, onBack: @escaping () -> Void) {
+    init(currentcity: CityDto, onBack: @escaping () -> Void) {
         self.currentcity = currentcity
         selected = currentcity.city
         backAction = onBack
@@ -101,23 +101,23 @@ struct CityTabView: View {
 }
 
 #Preview {
-    let previewCity = City(
+    let previewCity = CityDto(
         city: "Madrid",
-        location: Location(latitude: 40.4168, longitude: -3.7038),
+        location: LocationDto(latitude: 40.4168, longitude: -3.7038),
         weather: [
-            Weather(
+            WeatherDto(
                 day: "2024-11-25",
                 hourly: [
-                    HourlyWeather(hour: "00:00", temperature: 15, condition: "Sunny", humidity: 40, windSpeed: 10),
-                    HourlyWeather(hour: "06:00", temperature: 16, condition: "Cloudy", humidity: 42, windSpeed: 12),
-                    HourlyWeather(hour: "12:00", temperature: 20, condition: "Rainy", humidity: 50, windSpeed: 15)
+                    HourlyWeatherDto(hour: "00:00", temperature: 15, condition: "Sunny", humidity: 40, windSpeed: 10),
+                    HourlyWeatherDto(hour: "06:00", temperature: 16, condition: "Cloudy", humidity: 42, windSpeed: 12),
+                    HourlyWeatherDto(hour: "12:00", temperature: 20, condition: "Rainy", humidity: 50, windSpeed: 15)
                 ]
             ),
-            Weather(
+            WeatherDto(
                 day: "2024-11-26",
                 hourly: [
-                    HourlyWeather(hour: "00:00", temperature: 14, condition: "Partly Cloudy", humidity: 45, windSpeed: 8),
-                    HourlyWeather(hour: "12:00", temperature: 22, condition: "Sunny", humidity: 35, windSpeed: 5)
+                    HourlyWeatherDto(hour: "00:00", temperature: 14, condition: "Partly Cloudy", humidity: 45, windSpeed: 8),
+                    HourlyWeatherDto(hour: "12:00", temperature: 22, condition: "Sunny", humidity: 35, windSpeed: 5)
                 ]
             )
         ]

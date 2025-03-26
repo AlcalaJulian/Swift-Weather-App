@@ -8,7 +8,7 @@
 import SwiftUI
 struct HourlyWeatherScrollView: View {
     //@State var viewModel: CityDetailViewModel
-    @State var hourlyWeather: [HourlyWeather]
+    @State var hourlyWeather: [HourlyWeatherDto]
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CityRow: View {
-    let city: City
+    let city: CityDto
     var weather: [Weather] = []
     
     var body: some View {
@@ -34,7 +34,7 @@ struct CityRow: View {
 }
 
 struct CityRowContentView: View {
-    let city: City
+    let city: CityDto
     let condition: String
     let firstTemp: Double
     let maxTemp: Double

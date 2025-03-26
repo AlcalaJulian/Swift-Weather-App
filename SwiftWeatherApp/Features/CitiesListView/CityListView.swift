@@ -51,7 +51,7 @@ struct CitiesListView: View {
                 }
             }
             .navigationTitle("Time")
-            .navigationDestination(for: City.self) { city in
+            .navigationDestination(for: CityDto.self) { city in
 //               CityDetailView(city: city)
                 CityTabView(currentcity: city, onBack:{ path.removeLast()
                 })

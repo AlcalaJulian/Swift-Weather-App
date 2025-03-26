@@ -8,7 +8,7 @@ import SwiftUI
 
 struct CurrentTimeSectionView: View {
     //@State var viewModel: CityDetailViewModel
-    var hourlyWeather:[HourlyWeather]
+    var hourlyWeather:[HourlyWeatherDto]
     var currentDay: String
     var currentDate: String
     

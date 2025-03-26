@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapCard: View {
     
-    var city: City
+    var city: CityDto
     
     var body: some View{
         VStack{

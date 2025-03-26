@@ -10,22 +10,22 @@ import SwiftUICore
 import MapKit
 
 struct Forecast: Codable {
-    let cities: [City]
+    let cities: [CityDto]
 }
 
-struct City: Codable, Hashable, Identifiable {
+struct CityDto: Codable, Hashable, Identifiable {
     var id: String { city }
     
     let city: String
-    let location: Location
-    let weather: [Weather]
+    let location: LocationDto
+    let weather: [WeatherDto]
     
     func getCLLocation() -> CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     }
     
     
-    func getCurrentWeatherHour() -> HourlyWeather? {
+    func getCurrentWeatherHour() -> HourlyWeatherDto? {
         
         let now = Date.now
         
@@ -43,18 +43,18 @@ struct City: Codable, Hashable, Identifiable {
     }
 }
 
-struct Location: Codable, Hashable {
+struct LocationDto: Codable, Hashable {
     let latitude: Double
     let longitude: Double
 }
 
-struct Weather: Codable, Hashable, Identifiable {
+struct WeatherDto: Codable, Hashable, Identifiable {
     var id: String { day }
     let day: String
-    let hourly: [HourlyWeather]
+    let hourly: [HourlyWeatherDto]
 }
 
-struct HourlyWeather: Codable, Hashable {
+struct HourlyWeatherDto: Codable, Hashable {
     let hour: String
     let temperature: Int
     let condition: String

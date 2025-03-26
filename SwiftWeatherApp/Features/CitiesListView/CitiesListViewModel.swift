@@ -10,8 +10,10 @@ import Observation
 
 @Observable
 class CitiesListViewModel {
-    var cities: [City] = []
-    var filteredCities: [City] = []
+    var cities: [CityDto] = []
+    var filteredCities: [CityDto] = []
+    
+    
 
     init() {
         loadCities()
@@ -31,4 +33,6 @@ class CitiesListViewModel {
             }
         }
     }
+    
+    
 }

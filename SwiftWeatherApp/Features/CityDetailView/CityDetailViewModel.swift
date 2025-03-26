@@ -12,11 +12,11 @@ import SwiftUI
 class CityDetailViewModel: ObservableObject {
     var isExpanded = true
     var isOtherDaysExpanded = false
-    var selectedOtherDay: Weather?
+    var selectedOtherDay: WeatherDto?
     
-    let city: City
+    let city: CityDto
     
-    init(city: City) {
+    init(city: CityDto) {
         self.city = city
     }
     
@@ -24,7 +24,7 @@ class CityDetailViewModel: ObservableObject {
         city.city
     }
     
-    var currentWeather: HourlyWeather? {
+    var currentWeather: HourlyWeatherDto? {
         
         city.getCurrentWeatherHour()
     }
@@ -45,11 +45,11 @@ class CityDetailViewModel: ObservableObject {
         city.weather.first?.day ?? ""
     }
     
-    var hourlyWeather: [HourlyWeather] {
+    var hourlyWeather: [HourlyWeatherDto] {
         city.weather.first?.hourly ?? []
     }
     
-    var otherDaysWeather: [Weather] {
+    var otherDaysWeather: [WeatherDto] {
         Array(city.weather.dropFirst())
     }
     
@@ -92,7 +92,7 @@ class CityDetailViewModel: ObservableObject {
         
         return weekdaySymbols[weekdayIndex]
     }
-    func handleWeatherTap(for weather: Weather?) {
+    func handleWeatherTap(for weather: WeatherDto?) {
         selectedOtherDay = weather
     }
 }
