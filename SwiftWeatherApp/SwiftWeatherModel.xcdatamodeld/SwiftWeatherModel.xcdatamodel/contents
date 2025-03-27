@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D70" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="CIty" representedClassName="CIty" syncable="YES" codeGenerationType="class">
-        <attribute name="cityName" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="City" representedClassName="City" syncable="YES" codeGenerationType="class">
+        <attribute name="cityName" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="citylocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="locationCity" inverseEntity="Location"/>
         <relationship name="cityweather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Weather" inverseName="weathercity" inverseEntity="Weather"/>
     </entity>
     <entity name="HourlyWeather" representedClassName="HourlyWeather" syncable="YES" codeGenerationType="class">
-        <attribute name="condition" optional="YES" attributeType="String"/>
-        <attribute name="hourly" optional="YES" attributeType="String"/>
-        <attribute name="humidity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="temperature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="windSpeed" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weather" inverseName="weatherhourly" inverseEntity="Weather"/>
+        <attribute name="condition" attributeType="String"/>
+        <attribute name="hourly" attributeType="String"/>
+        <attribute name="humidity" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="temperature" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weatherId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windSpeed" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Weather" inverseName="weatherhourly" inverseEntity="Weather"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="locationCity" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="City" inverseName="citylocation" inverseEntity="City"/>
     </entity>
     <entity name="Weather" representedClassName="Weather" syncable="YES" codeGenerationType="class">
-        <attribute name="day" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="weathercity" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CIty" inverseName="cityweather" inverseEntity="CIty"/>
+        <attribute name="day" attributeType="String"/>
+        <relationship name="weathercity" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="City" inverseName="cityweather" inverseEntity="City"/>
         <relationship name="weatherhourly" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HourlyWeather" inverseName="weather" inverseEntity="HourlyWeather"/>
     </entity>
 </model>

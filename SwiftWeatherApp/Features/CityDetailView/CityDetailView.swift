@@ -1,9 +1,3 @@
-//
-//  CityDetail.swift
-//  SwiftWeatherApp
-//
-//  Created by Julián Alcalá Forero on 14/1/25.
-//
 
 import SwiftUI
 
@@ -16,94 +10,96 @@ struct CityDetailView: View {
     }
     
     var body: some View {
-        VStack{
-            List {
-                CurrentTimeHeaderSectionView(viewModel:viewModel)
-                CurrentTimeSectionView(hourlyWeather: viewModel.hourlyWeather, currentDay: viewModel.currentDay, currentDate: viewModel.currentDate)
-                WeatherListSectionView(viewModel:viewModel)
+        ZStack {
+            
+            VStack {
+                List {
+                    CurrentTimeHeaderSectionView(viewModel: viewModel)
+                    CurrentTimeSectionView(hourlyWeather: viewModel.hourlyWeather, currentDay: viewModel.currentDay, currentDate: viewModel.currentDate)
+                    WeatherListSectionView(viewModel: viewModel)
+                }
                 
-            }
-            .navigationTitle(viewModel.navigationTitle)
-            .sheet(item: $viewModel.selectedOtherDay){ day in
+                .navigationTitle(viewModel.navigationTitle)
                 
-                VStack{
-                    VStack{
-                        CurrentTimeSectionView(hourlyWeather: day.hourly, currentDay: day.day, currentDate: viewModel.convertStringToDateAndGetDayOfWeek(day.day))
-                        Button {
-                            viewModel.handleWeatherTap(for: nil)
-                        } label: {
-                            
-                            Text("OK")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .buttonStyle(.bordered)
-                            .background(.blue)
+                .sheet(item: $viewModel.selectedOtherDay) { day in
+                    VStack {
+                        VStack {
+                            CurrentTimeSectionView(hourlyWeather: day.hourly, currentDay: day.day, currentDate: viewModel.convertStringToDateAndGetDayOfWeek(day.day))
+                            Button {
+                                viewModel.handleWeatherTap(for: nil)
+                            } label: {
+                                Text("OK")
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 10)
+                                    .buttonStyle(.bordered)
+                                    .background(.blue)
+                            }
                         }
-                        
-                    }.padding(.top, 15)
+                        .padding(.top, 15)
                         .padding([.horizontal, .bottom], 15)
                         .background(.background, in: .rect(cornerRadius: 15))
-                        .shadow(color:.black.opacity(0.12), radius: 8)
+                        .shadow(color: .black.opacity(0.12), radius: 8)
                         .padding(.horizontal, 5)
-                    
-                }
-                .presentationCornerRadius(0)
-                .presentationBackground(.clear)
-                .padding(.horizontal, 15)
+                    }
+                    .presentationCornerRadius(0)
+                    .presentationBackground(.clear)
+                    .padding(.horizontal, 15)
                     .padding(.top, 5)
                     .presentationDetents([.medium])
                     .presentationDragIndicator(.hidden)
                     .presentationBackgroundInteraction(.enabled(upThrough: .height(400)))
-                
-            }
-            .sheet(isPresented: $isSHowingMap) {
-                ZStack{
-                    MapView(city: viewModel.city)
-                        .ignoresSafeArea()
-                    VStack{
-                        Spacer()
-                        MapCard(city: viewModel.city)
-                            .shadow(color: .black.opacity(0.7), radius: 20)
-                            .padding()
+                }
+                .sheet(isPresented: $isSHowingMap) {
+                    ZStack {
+                        MapView(city: viewModel.city)
+                            .ignoresSafeArea()
+                        VStack {
+                            Spacer()
+                            MapCard(city: viewModel.city)
+                                .shadow(color: .black.opacity(0.7), radius: 20)
+                                .padding()
+                        }
+                    }
+                    .ignoresSafeArea()
+                    .overlay(alignment: .topLeading) {
+                        BackButtonView(onClick: { isSHowingMap.toggle() })
                     }
                 }
-                
-                .ignoresSafeArea()
-                .overlay(alignment: .topLeading) {
-                    BackButtonView(onClick: { isSHowingMap.toggle() })
-                }
-                
             }
-            
+
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    if !viewModel.city.isFavorite {
+
+                            Image(systemName: "star.fill")
+                            .foregroundColor(.gray)
+                                .padding(10)
+                                .font(.title).onTapGesture {
+                                    Task{
+                                        await  viewModel.addToFavorites()
+                                    }
+                                }
+                    }
+
+                    if viewModel.city.isFavorite {
+
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.blue)
+                                .padding(10)
+                                .font(.title)
+                                .onTapGesture {
+                                    Task{
+                                        await viewModel.removeFromFavorites()
+                                    }
+                                }
+                    }
+                }
+                .padding()
+                Spacer()
+            }
         }
     }
-}
-
-
-
-#Preview {
-    let previewCity = CityDto(
-        city: "Madrid",
-        location: LocationDto(latitude: 40.4168, longitude: -3.7038),
-        weather: [
-            WeatherDto(
-                day: "2024-11-25",
-                hourly: [
-                    HourlyWeatherDto(hour: "00:00", temperature: 15, condition: "Sunny", humidity: 40, windSpeed: 10),
-                    HourlyWeatherDto(hour: "06:00", temperature: 16, condition: "Cloudy", humidity: 42, windSpeed: 12),
-                    HourlyWeatherDto(hour: "12:00", temperature: 20, condition: "Rainy", humidity: 50, windSpeed: 15)
-                ]
-            ),
-            WeatherDto(
-                day: "2024-11-26",
-                hourly: [
-                    HourlyWeatherDto(hour: "00:00", temperature: 14, condition: "Partly Cloudy", humidity: 45, windSpeed: 8),
-                    HourlyWeatherDto(hour: "12:00", temperature: 22, condition: "Sunny", humidity: 35, windSpeed: 5)
-                ]
-            )
-        ]
-    )
-    
-    return CityDetailView(city: previewCity)
 }

@@ -7,79 +7,77 @@
 
 import SwiftUI
 
-
 struct CitiesListView: View {
     @State private var viewModel = CitiesListViewModel()
-    
+
     @State private var searchQuery: String = ""
-    
+
     @State private var isShowSplash = true
-    
+
+    //@State private var selectedCity: CityDto? = nil
+
     var isSearching: Bool {
         !searchQuery.isEmpty
     }
-    
+
     @State var path = NavigationPath()
 
     var body: some View {
-        
+
         if isShowSplash {
             SplashScreen()
-                .onAppear{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         isShowSplash = false
                     }
                 }
-        }
-        else{
+        } else {
             NavigationStack(path: $path) {
-            List {
-                ScrollView {
-                    if isSearching {
-                        ForEach(viewModel.filteredCities) { city in
-                            NavigationLink(value: city) {
-                                CityRow(city: city, weather: city.weather)
+                List {
+                    ScrollView {
+                        if isSearching {
+                            ForEach(viewModel.filteredCities) { city in
+                                NavigationLink(value: city) {
+                                    CityRow(city: city, weather: city.weather)
+                                }
                             }
-                        }
-                    } else {
-                        ForEach(viewModel.cities) { city in
-                            NavigationLink(value: city) {
-                                CityRow(city: city, weather: city.weather)
+                        } else {
+                            ForEach(viewModel.cities) { city in
+                                NavigationLink(value: city) {
+                                    CityRow(city: city, weather: city.weather)
+                                }
                             }
                         }
                     }
                 }
-            }
-            .navigationTitle("Time")
-            .navigationDestination(for: CityDto.self) { city in
-//               CityDetailView(city: city)
-                CityTabView(currentcity: city, onBack:{ path.removeLast()
-                })
-            }
-            .scrollContentBackground(.hidden)
-            .searchable(
-                text: $searchQuery,
-                placement: .automatic,
-                prompt: "Search City"
-            )
-            .textInputAutocapitalization(.never)
-            .onChange(of: searchQuery) { oldValue, newValue in
-                viewModel.filterCities(for: newValue)
-            }
-            .overlay {
-                if isSearching && viewModel.filteredCities.isEmpty {
-                    ContentUnavailableView(
-                        "City not available",
-                        systemImage: "magnifyingglass",
-                        description: Text("No results found for **\(searchQuery)**")
-                    )
+                .navigationTitle("Time")
+                .navigationDestination(for: CityDto.self) { city in
+                    CityDetailView(city: city)
+                }
+                .scrollContentBackground(.hidden)
+                .searchable(
+                    text: $searchQuery,
+                    placement: .automatic,
+                    prompt: "Search City"
+                )
+                .textInputAutocapitalization(.never)
+                .onChange(of: searchQuery) { oldValue, newValue in
+                    viewModel.filterCities(for: newValue)
+                }
+                .overlay {
+                    if isSearching && viewModel.filteredCities.isEmpty {
+                        ContentUnavailableView(
+                            "City not available",
+                            systemImage: "magnifyingglass",
+                            description: Text(
+                                "No results found for **\(searchQuery)**")
+                        )
+                    }
                 }
             }
         }
     }
-    }
 }
-
 
 #Preview {
     CitiesListView()

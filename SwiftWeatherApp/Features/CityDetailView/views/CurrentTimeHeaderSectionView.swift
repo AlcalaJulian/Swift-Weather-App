@@ -9,6 +9,7 @@ import SwiftUI
 struct CurrentTimeHeaderSectionView: View {
     @State var viewModel: CityDetailViewModel
     
+    
     var body: some View {
         Section {
             VStack {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CityRow: View {
     let city: CityDto
-    var weather: [Weather] = []
+    var weather: [WeatherDto] = []
     
     var body: some View {
         if let firstWeather = weather.first, !firstWeather.hourly.isEmpty {

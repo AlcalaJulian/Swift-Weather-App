@@ -10,51 +10,50 @@ import SwiftUICore
 import MapKit
 
 struct Forecast: Codable {
-    let cities: [CityDto]
+    let cities: [CityApi]
 }
 
-struct CityDto: Codable, Hashable, Identifiable {
-    var id: String { city }
-    
+struct CityApi: Codable, Hashable /*, Identifiable*/ {
+    //var id: String { city }
     let city: String
-    let location: LocationDto
-    let weather: [WeatherDto]
+    let location: LocationApi
+    let weather: [WeatherApi]
     
     func getCLLocation() -> CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     }
     
     
-    func getCurrentWeatherHour() -> HourlyWeatherDto? {
-        
-        let now = Date.now
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-
-        let dateString = dateFormatter.string(from: now)
-        
-        let currentWeather = weather.first { $0.day == dateString } ?? weather.first
-        
-        dateFormatter.dateFormat = "hh:mm"
-        let hour = dateFormatter.string(from: now)
-        
-        return currentWeather?.hourly.first { $0.hour == hour } ?? currentWeather?.hourly.first
-    }
+//    func getCurrentWeatherHour() -> HourlyWeatherApi? {
+//        
+//        let now = Date.now
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//
+//        let dateString = dateFormatter.string(from: now)
+//        
+//        let currentWeather = weather.first { $0.day == dateString } ?? weather.first
+//        
+//        dateFormatter.dateFormat = "hh:mm"
+//        let hour = dateFormatter.string(from: now)
+//        
+//        return currentWeather?.hourly.first { $0.hour == hour } ?? currentWeather?.hourly.first
+//    }
 }
 
-struct LocationDto: Codable, Hashable {
+struct LocationApi: Codable, Hashable {
     let latitude: Double
     let longitude: Double
 }
 
-struct WeatherDto: Codable, Hashable, Identifiable {
+struct WeatherApi: Codable, Hashable, Identifiable {
     var id: String { day }
     let day: String
-    let hourly: [HourlyWeatherDto]
+    let hourly: [HourlyWeatherApi]
 }
 
-struct HourlyWeatherDto: Codable, Hashable {
+struct HourlyWeatherApi: Codable, Hashable {
     let hour: String
     let temperature: Int
     let condition: String
@@ -66,18 +65,18 @@ struct HourlyWeatherDto: Codable, Hashable {
         case windSpeed = "wind_speed" // el json viene así, para no modificar el json coloco esto [Julián]
     }
     
-    func getConditionIcon() -> Image {
-        switch condition.lowercased() {
-        case "sunny":
-            return Image("sunny")
-        case "cloudy":
-            return Image("cloud")
-        case "rainy":
-            return Image("rainy")
-        default:
-            return Image("clear")
-        }
-    }
+//    func getConditionIcon() -> Image {
+//        switch condition.lowercased() {
+//        case "sunny":
+//            return Image("sunny")
+//        case "cloudy":
+//            return Image("cloud")
+//        case "rainy":
+//            return Image("rainy")
+//        default:
+//            return Image("clear")
+//        }
+//    }
 }
 
 func loadJSON<T: Decodable>(filename: String) -> T {

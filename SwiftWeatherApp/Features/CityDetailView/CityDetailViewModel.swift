@@ -13,8 +13,9 @@ class CityDetailViewModel: ObservableObject {
     var isExpanded = true
     var isOtherDaysExpanded = false
     var selectedOtherDay: WeatherDto?
+    private let _context: CoreDataStack = CoreDataStack.shared
     
-    let city: CityDto
+    var city: CityDto
     
     init(city: CityDto) {
         self.city = city
@@ -92,7 +93,24 @@ class CityDetailViewModel: ObservableObject {
         
         return weekdaySymbols[weekdayIndex]
     }
+    
     func handleWeatherTap(for weather: WeatherDto?) {
         selectedOtherDay = weather
+    }
+    
+    func addToFavorites() async {
+            // Lógica para agregar la ciudad a favoritos
+        await _context.add(city)
+        city.isFavorite.toggle()
+            // Aquí podrías guardar la ciudad en una base de datos, UserDefaults, o cualquier otro sistema persistente.
+    }
+        
+    func removeFromFavorites() async {
+            // Lógica para eliminar la ciudad de favoritos
+        let cityToDelete = try? _context.container.viewContext.fetch(_context.requestById(UUID(uuidString: city.id)!)).first
+        if let toDelete = cityToDelete {
+            _context.delete(item: toDelete)
+            city.isFavorite.toggle()
+        }
     }
 }

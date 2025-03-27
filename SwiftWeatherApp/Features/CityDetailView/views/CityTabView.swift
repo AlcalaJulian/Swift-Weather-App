@@ -102,7 +102,9 @@ struct CityTabView: View {
 
 #Preview {
     let previewCity = CityDto(
+//        id: "1",
         city: "Madrid",
+//        isFavorite: true,
         location: LocationDto(latitude: 40.4168, longitude: -3.7038),
         weather: [
             WeatherDto(

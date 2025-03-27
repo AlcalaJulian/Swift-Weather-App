@@ -7,12 +7,13 @@
 
 import Foundation
 import Observation
+import CoreData
 
 @Observable
 class CitiesListViewModel {
     var cities: [CityDto] = []
     var filteredCities: [CityDto] = []
-    
+    private let _context: CoreDataStack = CoreDataStack.shared
     
 
     init() {
@@ -20,19 +21,91 @@ class CitiesListViewModel {
     }
 
     func loadCities() {
-        let forecast: Forecast = loadJSON(filename: "forecast_scheme")
-        cities = forecast.cities
+        cities = fetchLocalCities(search: "")
+    }
+    
+    func filterCities(for query: String) {
+       
+            filteredCities = []
+            
+            fetchRemoteCities(for: query).forEach { data in
+                if (cities.isEmpty || cities.first(where: { city in
+                    city.city == data.city
+                }) == nil){
+                    filteredCities.append(data)
+                }
+            }
     }
 
-    func filterCities(for query: String) {
-        if query.isEmpty {
-            filteredCities = []
-        } else {
-            filteredCities = cities.filter { city in
-                city.city.lowercased().contains(query.lowercased())
-            }
+    func fetchRemoteCities(for query: String) -> [CityDto] {
+        let forecast: Forecast = loadJSON(filename: "forecast_scheme")
+        return forecast.cities.filter{
+            $0.city.lowercased().contains(query.lowercased())
+        }.map {
+            CityDto(from: $0)
         }
     }
     
+    func fetchLocalCities(search: String) -> [CityDto] {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+//        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        if !search.isEmpty{
+            request.predicate = NSPredicate(format: "cityName CONTAINS[cd] %@", search)
+        }
+        
+        var cities :[CityDto] = []
+        
+        do{
+            
+            cities = try _context.container.viewContext.fetch(request).map {
+                CityDto(from: $0)
+            }
+            
+        }catch{
+            fatalError("Error request cities \(error.localizedDescription)")
+        }
+        
+        return cities;
+    }
+    
+    
+    func delete(_ id: UUID) async {
+        
+        do{
+            let city = try _context.container.viewContext.fetch(requestById(id)).first
+            
+            if let city
+            {
+                _context.container.viewContext.delete(city)
+                try _context.container.viewContext.save()
+            }
+        }catch{
+            
+        }
+    }
+    
+    func deleteByIds(_ ids: [UUID]) async throws {
+            
+            ids.forEach { id in
+                let city = try? _context.container.viewContext.fetch(requestById(id)).first
+                
+                if let city
+                {
+                    _context.container.viewContext.delete(city)
+                }
+            }
+            
+        guard _context.container.viewContext.hasChanges else { return }
+            
+        try _context.container.viewContext.save()
+    }
+    
+    private func requestById(_ id: UUID) -> NSFetchRequest<City>  {
+        let request = City.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+        return request
+    }    
     
 }
