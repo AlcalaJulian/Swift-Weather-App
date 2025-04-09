@@ -50,6 +50,9 @@ struct CitiesListView: View {
                         }
                     }
                 }
+                .onAppear{
+                    viewModel.loadCities()
+                }
                 .navigationTitle("Time")
                 .navigationDestination(for: CityDto.self) { city in
                     CityDetailView(city: city)
