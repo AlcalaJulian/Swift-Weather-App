@@ -53,35 +53,35 @@ extension CoreDataStack {
         }
     }
     
-    func add(_ city: CityDto) async {
+    func add(_ city: City) async {
        
         
-        let newCity = City(context: container.viewContext)
-        newCity.id = UUID()
-        newCity.cityName = city.city
-        
-        newCity.citylocation?.latitude = city.location.latitude
-        newCity.citylocation?.longitude = city.location.longitude
-        
-        city.weather.forEach{
-            let weather = Weather(context: container.viewContext)
-            weather.day = $0.day
-            
-            $0.hourly.forEach { HourlyDto in
-                let hourly = HourlyWeather(context: container.viewContext)
-                hourly.condition = HourlyDto.condition
-                hourly.hourly = HourlyDto.hour
-                hourly.humidity = Int32(HourlyDto.humidity)
-                hourly.temperature = Int32(HourlyDto.temperature)
-                hourly.windSpeed = Int32(HourlyDto.windSpeed)
-                
-                weather.addToWeatherhourly(hourly)
-            }
-            
-            newCity.addToCityweather(weather)
-        }
+//        let newCity = City(context: container.viewContext)
+//        newCity.id = UUID()
+//        newCity.cityName = city.city
+//        
+//        newCity.citylocation?.latitude = city.location.latitude
+//        newCity.citylocation?.longitude = city.location.longitude
+//        
+//        city.weather.forEach{
+//            let weather = Weather(context: container.viewContext)
+//            weather.day = $0.day
+//            
+//            $0.hourly.forEach { HourlyDto in
+//                let hourly = HourlyWeather(context: container.viewContext)
+//                hourly.condition = HourlyDto.condition
+//                hourly.hourly = HourlyDto.hour
+//                hourly.humidity = Int32(HourlyDto.humidity)
+//                hourly.temperature = Int32(HourlyDto.temperature)
+//                hourly.windSpeed = Int32(HourlyDto.windSpeed)
+//                
+//                weather.addToWeatherhourly(hourly)
+//            }
+//            
+//            newCity.addToCityweather(weather)
+//        }
      
-        container.viewContext.insert(newCity)
+        container.viewContext.insert(city)
         
         save()
     }

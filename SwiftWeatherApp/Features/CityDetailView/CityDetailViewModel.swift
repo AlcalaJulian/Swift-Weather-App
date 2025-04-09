@@ -100,16 +100,43 @@ class CityDetailViewModel: ObservableObject {
     
     func addToFavorites() async {
             // Lógica para agregar la ciudad a favoritos
-        await _context.add(city)
+        let newCity = City(context: _context.container.viewContext)
+        newCity.id = UUID()
+        newCity.cityName = city.city
+        
+        newCity.citylocation?.latitude = city.location.latitude
+        newCity.citylocation?.longitude = city.location.longitude
+        
+        city.weather.forEach{
+            let weather = Weather(context: _context.container.viewContext)
+            weather.day = $0.day
+            
+            $0.hourly.forEach { HourlyDto in
+                let hourly = HourlyWeather(context: _context.container.viewContext)
+                hourly.condition = HourlyDto.condition
+                hourly.hourly = HourlyDto.hour
+                hourly.humidity = Int32(HourlyDto.humidity)
+                hourly.temperature = Int32(HourlyDto.temperature)
+                hourly.windSpeed = Int32(HourlyDto.windSpeed)
+                
+                weather.addToWeatherhourly(hourly)
+            }
+            
+            newCity.addToCityweather(weather)
+        }
+        
+        await _context.add(newCity)
+        city.id = newCity.id!.uuidString
         city.isFavorite.toggle()
-            // Aquí podrías guardar la ciudad en una base de datos, UserDefaults, o cualquier otro sistema persistente.
     }
         
     func removeFromFavorites() async {
             // Lógica para eliminar la ciudad de favoritos
+        
         let cityToDelete = try? _context.container.viewContext.fetch(_context.requestById(UUID(uuidString: city.id)!)).first
         if let toDelete = cityToDelete {
             _context.delete(item: toDelete)
+            city.id = city.city
             city.isFavorite.toggle()
         }
     }
