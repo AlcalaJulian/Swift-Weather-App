@@ -16,10 +16,6 @@ class CitiesListViewModel {
     private let _context: CoreDataStack = CoreDataStack.shared
     
 
-    init() {
-        loadCities()
-    }
-
     func loadCities() {
         cities = fetchLocalCities(search: "")
     }
