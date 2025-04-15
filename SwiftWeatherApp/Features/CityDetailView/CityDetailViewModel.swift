@@ -25,73 +25,58 @@ class CityDetailViewModel: ObservableObject {
         city.city
     }
     
-    var currentWeather: HourlyWeatherDto? {
-        
-        city.getCurrentWeatherHour()
+    var currentWeather: CurrentWeatherDto {
+        city.currentWeather
     }
     
     var currentTemperature: String {
-        "\(Int(currentWeather?.temperature ?? 0))°"
+        "\(Int(currentWeather.temp))°"
     }
     
     var currentCondition: String {
-        currentWeather?.condition ?? "Sunny"
+        currentWeather.condition.capitalized
     }
     
     var currentDay: String {
-        convertStringToDateAndGetDayOfWeek(city.weather.first?.day ?? "")
+        let date = Date(timeIntervalSince1970: TimeInterval(currentWeather.dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: date)
     }
     
     var currentDate: String {
-        city.weather.first?.day ?? ""
+        let date = Date(timeIntervalSince1970: TimeInterval(currentWeather.dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium 
+        return dateFormatter.string(from: date)
     }
     
     var hourlyWeather: [HourlyWeatherDto] {
-        city.weather.first?.hourly ?? []
+        return city.weather.first?.hourly ?? []
     }
     
-    var otherDaysWeather: [WeatherDto] {
-        Array(city.weather.dropFirst())
+    var otherDaysWeather: [DailyWeatherDto] {
+        return city.weather.compactMap { $0.daily }
     }
+
     
-    func temperatureRange(from temperatures: [Int]) -> String {
-        guard let maxTemp = temperatures.max(), let minTemp = temperatures.min() else {
-            return ""
-        }
-        return "Max: \(maxTemp)°C - Min: \(minTemp)°C"
+    func feelsLike() -> Double {
+        return currentWeather.feelsLike
     }
     
     func getConditionIcon(for condition: String) -> Image {
-        switch condition.lowercased() {
-        case "sunny":
+        switch condition {
+        case "Sunny":
             return Image("sunny")
-        case "cloudy":
+        case "Clouds":
             return Image("cloud")
-        case "rainy":
+        case "Clear":
+            return Image("clear")
+        case "Rain":
             return Image("rainy")
         default:
             return Image("cloudy")
         }
-    }
-    
-    func convertStringToDateAndGetDayOfWeek(_ dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        dateFormatter.locale = Locale.current
-        
-        guard let date = dateFormatter.date(from: dateString) else {
-            return "Unknown"
-        }
-        
-        let calendar = Calendar.current
-        let weekdayIndex = calendar.component(.weekday, from: date) - 1
-        
-        guard let weekdaySymbols = dateFormatter.weekdaySymbols,
-              weekdayIndex < weekdaySymbols.count else {
-            return "Unknown"
-        }
-        
-        return weekdaySymbols[weekdayIndex]
     }
     
     func handleWeatherTap(for weather: WeatherDto?) {
@@ -99,7 +84,6 @@ class CityDetailViewModel: ObservableObject {
     }
     
     func addToFavorites() async {
-            // Lógica para agregar la ciudad a favoritos
         let newCity = City(context: _context.container.viewContext)
         newCity.id = UUID()
         newCity.cityName = city.city
@@ -107,22 +91,22 @@ class CityDetailViewModel: ObservableObject {
         newCity.citylocation?.latitude = city.location.latitude
         newCity.citylocation?.longitude = city.location.longitude
         
-        city.weather.forEach{
-            let weather = Weather(context: _context.container.viewContext)
-            weather.day = $0.day
+        city.weather.forEach {
+            let weatherEntity = Weather(context: _context.container.viewContext)
+            weatherEntity.day = $0.day
             
-            $0.hourly.forEach { HourlyDto in
+            $0.hourly.forEach { hourlyDto in
                 let hourly = HourlyWeather(context: _context.container.viewContext)
-                hourly.condition = HourlyDto.condition
-                hourly.hourly = HourlyDto.hour
-                hourly.humidity = Int32(HourlyDto.humidity)
-                hourly.temperature = Int32(HourlyDto.temperature)
-                hourly.windSpeed = Int32(HourlyDto.windSpeed)
+                hourly.condition = hourlyDto.condition
+                hourly.hourly = hourlyDto.hour
+                hourly.humidity = Int16(hourlyDto.humidity)
+                hourly.temperature = Int16(hourlyDto.temperature)
+                hourly.windSpeed = Int16(hourlyDto.windSpeed)
                 
-                weather.addToWeatherhourly(hourly)
+                weatherEntity.addToWeatherhourly(hourly)
             }
             
-            newCity.addToCityweather(weather)
+            newCity.addToCityweather(weatherEntity)
         }
         
         await _context.add(newCity)
@@ -131,8 +115,6 @@ class CityDetailViewModel: ObservableObject {
     }
         
     func removeFromFavorites() async {
-            // Lógica para eliminar la ciudad de favoritos
-        
         let cityToDelete = try? _context.container.viewContext.fetch(_context.requestById(UUID(uuidString: city.id)!)).first
         if let toDelete = cityToDelete {
             _context.delete(item: toDelete)

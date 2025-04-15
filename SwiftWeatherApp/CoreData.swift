@@ -41,14 +41,11 @@ class CoreDataStack {
 
 extension CoreDataStack {
     func save() {
-        // Verify that the context has uncommitted changes.
         guard container.viewContext.hasChanges else { return }
         
         do {
-            // Attempt to save changes.
             try container.viewContext.save()
         } catch {
-            // Handle the error appropriately.
             print("Failed to save the context:", error.localizedDescription)
         }
     }
@@ -56,31 +53,7 @@ extension CoreDataStack {
     func add(_ city: City) async {
        
         
-//        let newCity = City(context: container.viewContext)
-//        newCity.id = UUID()
-//        newCity.cityName = city.city
-//        
-//        newCity.citylocation?.latitude = city.location.latitude
-//        newCity.citylocation?.longitude = city.location.longitude
-//        
-//        city.weather.forEach{
-//            let weather = Weather(context: container.viewContext)
-//            weather.day = $0.day
-//            
-//            $0.hourly.forEach { HourlyDto in
-//                let hourly = HourlyWeather(context: container.viewContext)
-//                hourly.condition = HourlyDto.condition
-//                hourly.hourly = HourlyDto.hour
-//                hourly.humidity = Int32(HourlyDto.humidity)
-//                hourly.temperature = Int32(HourlyDto.temperature)
-//                hourly.windSpeed = Int32(HourlyDto.windSpeed)
-//                
-//                weather.addToWeatherhourly(hourly)
-//            }
-//            
-//            newCity.addToCityweather(weather)
-//        }
-     
+
         container.viewContext.insert(city)
         
         save()

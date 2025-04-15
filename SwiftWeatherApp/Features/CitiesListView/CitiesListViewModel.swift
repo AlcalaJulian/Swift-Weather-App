@@ -14,94 +14,67 @@ class CitiesListViewModel {
     var cities: [CityDto] = []
     var filteredCities: [CityDto] = []
     private let _context: CoreDataStack = CoreDataStack.shared
-    
 
     func loadCities() {
         cities = fetchLocalCities(search: "")
     }
     
     func filterCities(for query: String) {
-       
-            filteredCities = []
-            
-            fetchRemoteCities(for: query).forEach { data in
-                if (cities.isEmpty || cities.first(where: { city in
-                    city.city == data.city
-                }) == nil){
-                    filteredCities.append(data)
-                }
-            }
+        let remoteCities = fetchRemoteCities(for: query)
+        let existingCityNames = Set(cities.map { $0.city.lowercased() })
+        filteredCities = remoteCities.filter { !existingCityNames.contains($0.city.lowercased()) }
     }
-
+    
     func fetchRemoteCities(for query: String) -> [CityDto] {
-        let forecast: Forecast = loadJSON(filename: "forecast_scheme")
-        return forecast.cities.filter{
-            $0.city.lowercased().contains(query.lowercased())
+        let forecast: WeatherApiResponse = loadJSON(filename: "five_cities_weather")
+        return forecast.cities.filter {
+            $0.timezone.lowercased().contains(query.lowercased())
         }.map {
-            CityDto(from: $0)
+            CityDto(from: $0, cityName: $0.timezone)
         }
     }
+
     
     func fetchLocalCities(search: String) -> [CityDto] {
         let request: NSFetchRequest<City> = City.fetchRequest()
-//        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
-        if !search.isEmpty{
+        if !search.isEmpty {
             request.predicate = NSPredicate(format: "cityName CONTAINS[cd] %@", search)
         }
         
-        var cities :[CityDto] = []
-        
-        do{
-            
-            cities = try _context.container.viewContext.fetch(request).map {
-                CityDto(from: $0)
-            }
-            
-        }catch{
-            fatalError("Error request cities \(error.localizedDescription)")
+        do {
+            return try _context.container.viewContext.fetch(request).map { CityDto(entity: $0) }
+        } catch {
+            fatalError("Error al obtener las ciudades locales: \(error.localizedDescription)")
         }
-        
-        return cities;
     }
-    
-    
-    func delete(_ id: UUID) async {
         
-        do{
-            let city = try _context.container.viewContext.fetch(requestById(id)).first
-            
-            if let city
-            {
+    func delete(_ id: UUID) async {
+        do {
+            if let city = try _context.container.viewContext.fetch(requestById(id)).first {
                 _context.container.viewContext.delete(city)
                 try _context.container.viewContext.save()
             }
-        }catch{
-            
+        } catch {
+            print("Error al eliminar la ciudad con ID \(id): \(error.localizedDescription)")
         }
     }
     
     func deleteByIds(_ ids: [UUID]) async throws {
-            
-            ids.forEach { id in
-                let city = try? _context.container.viewContext.fetch(requestById(id)).first
-                
-                if let city
-                {
-                    _context.container.viewContext.delete(city)
-                }
+        for id in ids {
+            if let city = try? _context.container.viewContext.fetch(requestById(id)).first {
+                _context.container.viewContext.delete(city)
             }
-            
+        }
         guard _context.container.viewContext.hasChanges else { return }
-            
         try _context.container.viewContext.save()
     }
     
-    private func requestById(_ id: UUID) -> NSFetchRequest<City>  {
+    private func requestById(_ id: UUID) -> NSFetchRequest<City> {
         let request = City.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "id == %@", id.uuidString)
         return request
-    }    
-    
+    }
 }
+

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 struct MapCard: View {
     
     var city: CityDto
@@ -66,3 +66,4 @@ struct MapCard: View {
         ).cornerRadius(10)
     }
 }
+*/

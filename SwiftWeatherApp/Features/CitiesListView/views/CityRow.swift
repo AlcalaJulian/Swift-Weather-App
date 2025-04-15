@@ -1,82 +1,71 @@
-//
-//  CityRow.swift
-//  SwiftWeatherApp
-//
-//  Created by Julián Alcalá Forero on 18/1/25.
-//
-
 import SwiftUI
 
 struct CityRow: View {
     let city: CityDto
-    var weather: [WeatherDto] = []
     
     var body: some View {
-        if let firstWeather = weather.first, !firstWeather.hourly.isEmpty {
-            let hourly = firstWeather.hourly
-            let firstTemp = hourly.first!.temperature
-            let condition = hourly.first!.condition
-            let temperatures = hourly.map { $0.temperature }
-            
-            if let maxTemp = temperatures.max(), let minTemp = temperatures.min() {
-                CityRowContentView(city: city,
-                            condition: "\(condition)",
-                            firstTemp: Double(firstTemp),
-                            maxTemp: Double(maxTemp),
-                            minTemp: Double(minTemp))
-            } else {
-                CityRowFallbackView(city: city.city)
-            }
-        } else {
-            CityRowFallbackView(city: city.city)
-        }
+        CityRowContentView(
+            city: city,
+            condition: city.currentWeather.condition,
+            currentTemp: city.currentWeather.temp,
+            feelsLike: city.currentWeather.feelsLike,
+            humidity: city.currentWeather.humidity
+        )
     }
 }
 
 struct CityRowContentView: View {
     let city: CityDto
     let condition: String
-    let firstTemp: Double
-    let maxTemp: Double
-    let minTemp: Double
+    let currentTemp: Double
+    let feelsLike: Double
+    let humidity: Int
+    
     @Environment(\.colorScheme) var colorScheme
+    
+    var backgroundGradient: LinearGradient {
+        let startColor = colorScheme == .dark ? Color.blue.opacity(0.6) : Color.blue.opacity(0.4)
+        let endColor = colorScheme == .dark ? Color.gray.opacity(0.7) : Color(.lightGray).opacity(0.7)
+        return LinearGradient(gradient: Gradient(colors: [startColor, endColor]),
+                              startPoint: .topLeading,
+                              endPoint: .bottomTrailing)
+    }
+    
+    var leftContent: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(city.city)
+                .font(.system(size: 22))
+                .foregroundColor(colorScheme == .dark ? .white : .black)
+            Text(condition.capitalized)
+                .font(.system(size: 16))
+                .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.9))
+        }
+        .padding(.leading, 16)
+    }
+    
+    var rightContent: some View {
+        VStack(alignment: .trailing, spacing: 4) {
+            Text("\(currentTemp, specifier: "%.0f")°")
+                .font(.system(size: 48))
+                .foregroundColor(colorScheme == .dark ? .white : .black)
+            Text("Sensación: \(feelsLike, specifier: "%.0f")°")
+                .font(.system(size: 14))
+                .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
+            Text("Humedad: \(humidity)%")
+                .font(.system(size: 14))
+                .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
+        }
+        .padding(.trailing, 16)
+    }
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(city.city)
-                    .font(.system(size: 22))
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                Text(condition)
-                    .font(.system(size: 16))
-                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.9))
-            }
-            .padding(.leading, 16)
-            
+            leftContent
             Spacer()
-            
-            VStack(alignment: .trailing, spacing: 4) {
-                Text("\(firstTemp, specifier: "%.0f")°")
-                    .font(.system(size: 48))
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                
-                Text("Máx: \(maxTemp, specifier: "%.0f")°  •  Mín: \(minTemp, specifier: "%.0f")°")
-                    .font(.system(size: 14))
-                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
-            }
-            .padding(.trailing, 16)
+            rightContent
         }
         .padding(.vertical, 16)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    colorScheme == .dark ? Color.blue.opacity(0.6) : Color.blue.opacity(0.4),
-                    colorScheme == .dark ? Color.gray.opacity(0.7) : Color(.lightGray).opacity(0.7)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(backgroundGradient)
         .cornerRadius(12)
     }
 }

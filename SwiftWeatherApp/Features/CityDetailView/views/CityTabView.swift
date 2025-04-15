@@ -71,8 +71,11 @@ struct CityTabView: View {
                 .padding()
             }
             .padding()
-            }.tabViewStyle(.page)
+            }
+        /*
+        .tabViewStyle(.page)
                 .sheet(isPresented: $isSHowingMap) {
+                 
                     ZStack{
                         MapView(city: currentcity)
                             .ignoresSafeArea()
@@ -83,6 +86,7 @@ struct CityTabView: View {
                                 .padding()
                         }
                     }
+                    
                     
                     .ignoresSafeArea()
                     .overlay(alignment: .topLeading) {
@@ -96,34 +100,35 @@ struct CityTabView: View {
             
             
         }
+        */
     }
     
 }
 
-#Preview {
-    let previewCity = CityDto(
+//#Preview {
+//    let previewCity = CityDto(
 //        id: "1",
-        city: "Madrid",
+//        city: "Madrid",
 //        isFavorite: true,
-        location: LocationDto(latitude: 40.4168, longitude: -3.7038),
-        weather: [
-            WeatherDto(
-                day: "2024-11-25",
-                hourly: [
-                    HourlyWeatherDto(hour: "00:00", temperature: 15, condition: "Sunny", humidity: 40, windSpeed: 10),
-                    HourlyWeatherDto(hour: "06:00", temperature: 16, condition: "Cloudy", humidity: 42, windSpeed: 12),
-                    HourlyWeatherDto(hour: "12:00", temperature: 20, condition: "Rainy", humidity: 50, windSpeed: 15)
-                ]
-            ),
-            WeatherDto(
-                day: "2024-11-26",
-                hourly: [
-                    HourlyWeatherDto(hour: "00:00", temperature: 14, condition: "Partly Cloudy", humidity: 45, windSpeed: 8),
-                    HourlyWeatherDto(hour: "12:00", temperature: 22, condition: "Sunny", humidity: 35, windSpeed: 5)
-                ]
-            )
-        ]
-    )
+//        location: LocationDto(latitude: 40.4168, longitude: -3.7038),
+//        weather: [
+//            WeatherDto(
+//                day: "2024-11-25",
+//                hourly: [
+//                    HourlyWeatherDto(hour: "00:00", temperature: 15, condition: "Sunny", humidity: 40, windSpeed: 10),
+//                    HourlyWeatherDto(hour: "06:00", temperature: 16, condition: "Cloudy", humidity: 42, windSpeed: 12),
+//                    HourlyWeatherDto(hour: "12:00", temperature: 20, condition: "Rainy", humidity: 50, windSpeed: 15)
+//                ]
+//            ),
+//            WeatherDto(
+//                day: "2024-11-26",
+//                hourly: [
+//                    HourlyWeatherDto(hour: "00:00", temperature: 14, condition: "Partly Cloudy", humidity: 45, windSpeed: 8),
+//                    HourlyWeatherDto(hour: "12:00", temperature: 22, condition: "Sunny", humidity: 35, windSpeed: 5)
+//                ]
+//            )
+//        ]
+//    )
     
-    CityTabView(currentcity: previewCity, onBack: {})
-}
+//    CityTabView(currentcity: previewCity, onBack: {})
+//}

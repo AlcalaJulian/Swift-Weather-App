@@ -13,13 +13,14 @@ struct CurrentTimeHeaderSectionView: View {
     var body: some View {
         Section {
             VStack {
-                viewModel.currentWeather?.getConditionIcon()
+                viewModel.getConditionIcon(for: viewModel.currentWeather.weather.first!.main)
                     .resizable()
                     .frame(width: 120, height: 120)
                 Text(viewModel.currentTemperature)
                     .font(.system(size: 58))
                 Text(viewModel.currentCondition)
-                Text(viewModel.temperatureRange(from: viewModel.hourlyWeather.map { $0.temperature }))
+                Text("Sensación: \(Int(viewModel.feelsLike()))°")
+                    .font(.headline)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)

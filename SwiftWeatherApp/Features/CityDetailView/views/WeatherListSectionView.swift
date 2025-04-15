@@ -9,26 +9,23 @@ import SwiftUI
 struct WeatherListSectionView: View {
     @State var viewModel: CityDetailViewModel
     
-    var body : some View {
+    var body: some View {
         Section {
             DisclosureGroup(
                 isExpanded: $viewModel.isOtherDaysExpanded,
                 content: {
-                    ForEach(viewModel.otherDaysWeather, id: \.day) { weather in
+                    ForEach(viewModel.otherDaysWeather, id: \.self) { daily in
                         Button(action: {
-                            viewModel.handleWeatherTap(for: weather)
                         }) {
                             HStack {
-                                Text(viewModel.convertStringToDateAndGetDayOfWeek(weather.day))
+                                Text("Day: \(daily.condition)")
                                     .font(.headline)
-                                weather.hourly.first!.getConditionIcon()
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                Text(viewModel.temperatureRange(from: weather.hourly.map { $0.temperature }))
+                                Text("Min: \(daily.min)° / Max: \(daily.max)°")
+                                    .font(.caption)
                             }
                             .padding(.vertical, 5)
                         }
-                        .buttonStyle(PlainButtonStyle()) 
+                        .buttonStyle(PlainButtonStyle())
                     }
                 },
                 label: {
@@ -44,3 +41,4 @@ struct WeatherListSectionView: View {
         }
     }
 }
+
