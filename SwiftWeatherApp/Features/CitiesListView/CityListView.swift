@@ -60,6 +60,7 @@ struct CitiesListView: View {
                 }
             }
             .onAppear {
+                searchQuery = ""
                 viewModel.loadCities()
                 viewModel.loadHistory()
             }

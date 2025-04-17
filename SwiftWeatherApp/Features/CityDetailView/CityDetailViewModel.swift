@@ -144,6 +144,8 @@ class CityDetailViewModel: ObservableObject {
             _context.delete(item: toDelete)
             city.id = city.city
             city.isFavorite.toggle()
+        }else{
+            city.isFavorite = false
         }
     }
 }
