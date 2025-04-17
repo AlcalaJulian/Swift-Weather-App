@@ -14,53 +14,27 @@ struct MapView: View {
     let geocoder = CLGeocoder()
     
     var body: some View {
-        Map{
-            
+        Map {
             Annotation(city.city, coordinate: city.getCLLocation()) {
-                if let weather = city.getCurrentWeatherHour(){
-                
-                    ZStack{
-                        
-                        RoundedRectangle(cornerRadius: 7)
-                            .fill(.white)
-                            .padding(2)
-                        
-                        
-                        RoundedRectangle(cornerRadius: 7)
-                            .stroke(.black, lineWidth: 2)
-                        VStack{
+                if let weather = city.getCurrentWeatherHour() {
+                    ZStack {
+                        // Background with blur and rounded corners
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(.ultraThinMaterial)
+                            .background(.regularMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .shadow(radius: 5)
+
+                        VStack(spacing: 6) {
                             weather.getConditionIcon()
                                 .resizable()
+                                .scaledToFit()
                                 .frame(width: 40, height: 40)
-                                .padding(.top, 12)
-                            Image(systemName: "\(weather.temperature).square.fill")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(10)
-                                .padding()
-//                                .background(.black)
-                                .foregroundStyle(.white)
-                        }.padding(.horizontal, 2)
-                            .padding(.bottom,2)
-                            .background(.primary)
-                        
+                        }
+                        .padding(8)
                     }
-                    
                 }
             }
-            
-            
-//                Marker(city.city,
-//                       image: city.weather.first!.hourly.first!.condition.lowercased(),
-//                       coordinate: CLLocationCoordinate2D(latitude:city.location.latitude,
-//                                                                                                                                      longitude: city.location.longitude))
-//                
-//                    .tag(MapSelection(
-//                        MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:city.location.latitude,
-//                                                longitude: city.location.longitude)))))
-//                    .mapItemDetailSelectionAccessory(.callout)
-            
         }
         .mapControls{
             MapCompass()

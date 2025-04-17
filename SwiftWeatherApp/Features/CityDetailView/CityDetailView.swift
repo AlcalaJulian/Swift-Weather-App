@@ -17,6 +17,13 @@ struct CityDetailView: View {
                     CurrentTimeHeaderSectionView(viewModel: viewModel)
                     CurrentTimeSectionView(hourlyWeather: viewModel.hourlyWeather, currentDay: viewModel.currentDay, currentDate: viewModel.currentDate)
                     WeatherListSectionView(viewModel: viewModel)
+                    Section{
+                                        Button{
+                                            isSHowingMap = true
+                                        } label: {
+                                            Text("Show map📍")
+                                        }.frame(width: 300)
+                                    }
                 }
                 
                 .navigationTitle(viewModel.navigationTitle)
@@ -49,6 +56,7 @@ struct CityDetailView: View {
                     .presentationDetents([.medium])
                     .presentationDragIndicator(.hidden)
                     .presentationBackgroundInteraction(.enabled(upThrough: .height(400)))
+                    
                 }
                 .sheet(isPresented: $isSHowingMap) {
                     ZStack {

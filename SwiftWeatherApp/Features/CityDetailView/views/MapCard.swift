@@ -1,68 +1,63 @@
-//
-//  MapCard.swift
-//  SwiftWeatherApp
-//
-//  Created by Johan Charles on 20/1/25.
-//
-
 import SwiftUI
 
 struct MapCard: View {
     
     var city: CityDto
     
-    var body: some View{
-        VStack{
-            HStack{
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 16) {
                 
-                ZStack{
-                    if let temp = city.getCurrentWeatherHour()?.temperature{
+                ZStack {
+                    // Gradient background inside the icon box
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.purple.opacity(0.6)]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 100, height: 100)
+                        .shadow(radius: 4)
+                    
+                    if let temp = city.getCurrentWeatherHour()?.temperature {
                         Image(systemName: "\(temp).square.fill")
                             .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(10)
-                            .background(.white)
-                        }
-                    else
-                        {
-                            city.getCurrentWeatherHour()?
-                                .getConditionIcon()
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(10)
-                                .background(.white)
-                        }
-                    
-                    
-                        
-                }
-                .padding(6)
-                .background(.white)
-                .cornerRadius(10)
-                
-                
-                VStack{
-                    
-                        Text(city.city)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.blue)
-                        
-                            Text("Latitude: " + String(city.location.latitude))
-                                .font(.subheadline)
-                            Text("Longitude: " + String(city.location.longitude))
-                                .font(.subheadline)
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.white)
+                    } else {
+                        city.getCurrentWeatherHour()?
+                            .getConditionIcon()
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.white)
                     }
+                }
                 
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(city.city)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.primary)
+                    
+                    HStack {
+                        Label("\(city.location.latitude)", systemImage: "location.north.fill")
+                        Label("\(city.location.longitude)", systemImage: "location")
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                }
             }
         }
-        .padding(20)
+        .padding()
         .background(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 16)
                 .fill(.ultraThinMaterial)
-                .offset(y: 35)
-        ).cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.1), radius: 6, x: 0, y: 4)
+        )
+        .padding(.horizontal)
     }
 }
