@@ -52,9 +52,9 @@ extension CityDto {
 
 
 extension LocationDto {
-    init(from apiModel: Location?) {
-        self.latitude = apiModel?.latitude ?? 0
-        self.longitude = apiModel?.longitude ?? 0
+    init(from location: Location?) {
+        self.latitude = location?.latitude ?? 0
+        self.longitude = location?.longitude ?? 0
     }
 }
 

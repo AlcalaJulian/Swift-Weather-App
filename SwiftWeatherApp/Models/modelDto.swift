@@ -83,7 +83,7 @@ struct HourlyWeatherDto: Codable, Hashable {
         case "sunny":
             return Image("sunny")
         case "cloudy":
-            return Image("cloud")
+            return Image("cloudy")
         case "rainy":
             return Image("rainy")
         default:

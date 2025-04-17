@@ -110,8 +110,12 @@ class CityDetailViewModel: ObservableObject {
         newCity.id = UUID()
         newCity.cityName = city.city
         
-        newCity.citylocation?.latitude = city.location.latitude
-        newCity.citylocation?.longitude = city.location.longitude
+        let citylocation = Location(context: _context.container.viewContext)
+        
+        citylocation.latitude = city.location.latitude
+        citylocation.longitude = city.location.longitude
+        
+        newCity.citylocation = citylocation
         
         city.weather.forEach{
             let weather = Weather(context: _context.container.viewContext)
