@@ -13,8 +13,7 @@ struct Forecast: Codable {
     let cities: [CityApi]
 }
 
-struct CityApi: Codable, Hashable /*, Identifiable*/ {
-    //var id: String { city }
+struct CityApi: Codable, Hashable {
     let city: String
     let location: LocationApi
     let weather: [WeatherApi]
@@ -22,24 +21,6 @@ struct CityApi: Codable, Hashable /*, Identifiable*/ {
     func getCLLocation() -> CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     }
-    
-    
-//    func getCurrentWeatherHour() -> HourlyWeatherApi? {
-//        
-//        let now = Date.now
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//
-//        let dateString = dateFormatter.string(from: now)
-//        
-//        let currentWeather = weather.first { $0.day == dateString } ?? weather.first
-//        
-//        dateFormatter.dateFormat = "hh:mm"
-//        let hour = dateFormatter.string(from: now)
-//        
-//        return currentWeather?.hourly.first { $0.hour == hour } ?? currentWeather?.hourly.first
-//    }
 }
 
 struct LocationApi: Codable, Hashable {
@@ -64,19 +45,6 @@ struct HourlyWeatherApi: Codable, Hashable {
         case hour, temperature, condition, humidity
         case windSpeed = "wind_speed" // el json viene así, para no modificar el json coloco esto [Julián]
     }
-    
-//    func getConditionIcon() -> Image {
-//        switch condition.lowercased() {
-//        case "sunny":
-//            return Image("sunny")
-//        case "cloudy":
-//            return Image("cloud")
-//        case "rainy":
-//            return Image("rainy")
-//        default:
-//            return Image("clear")
-//        }
-//    }
 }
 
 func loadJSON<T: Decodable>(filename: String) -> T {

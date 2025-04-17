@@ -42,7 +42,7 @@ extension HourlyWeatherDto {
 
 extension CityDto {
     init(from city: City, isFavorite: Bool = true) {
-        self.id = city.id!.uuidString // Usamos el nombre de la ciudad como ID o UUID si prefieres uno único.
+        self.id = city.id!.uuidString
         self.city = city.cityName!
         self.isFavorite = isFavorite
         self.location = LocationDto(from: city.citylocation)

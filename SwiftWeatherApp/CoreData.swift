@@ -33,7 +33,7 @@ class CoreDataStack {
         container.viewContext.automaticallyMergesChangesFromParent = true
                 if let description = container.persistentStoreDescriptions.first {
                     description.shouldMigrateStoreAutomatically = true
-                    description.shouldInferMappingModelAutomatically = false
+                    description.shouldInferMappingModelAutomatically = true
                 }
     }
 }
@@ -41,20 +41,18 @@ class CoreDataStack {
 
 extension CoreDataStack {
     func save() {
-        // Verify that the context has uncommitted changes.
         guard container.viewContext.hasChanges else { return }
         
         do {
-            // Attempt to save changes.
             try container.viewContext.save()
         } catch {
-            // Handle the error appropriately.
             print("Failed to save the context:", error.localizedDescription)
         }
     }
     
     func add(_ city: City) async {
      
+        
         container.viewContext.insert(city)
         
         save()
@@ -70,5 +68,53 @@ extension CoreDataStack {
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "id == %@", id.uuidString)
         return request
+    }
+    func saveSearch(query: String) {
+        let context = container.viewContext
+        let item = SearchHistoryItem(context: context)
+        item.id = UUID()
+        item.query = query
+        item.searchedAt = Date()
+        save()
+    }
+    func fetchSearchHistory(limit: Int = 10) -> [SearchHistoryItem] {
+        let context = container.viewContext
+        let req: NSFetchRequest<SearchHistoryItem> = SearchHistoryItem.fetchRequest()
+        req.sortDescriptors = [
+            NSSortDescriptor(keyPath: \SearchHistoryItem.searchedAt, ascending: false)
+        ]
+        req.fetchLimit = limit
+        do {
+            return try context.fetch(req)
+        } catch {
+            print("❌ Error cargando historial de búsquedas: \(error)")
+            return []
+        }
+    }
+       
+    func deleteHistoryItem(_ item: SearchHistoryItem) {
+        container.viewContext.delete(item)
+        save()
+    }
+    
+    func ensureUserSettings() {
+        let context = container.viewContext
+        let request: NSFetchRequest<UserSettings> = UserSettings.fetchRequest()
+        if (try? context.count(for: request)) == 0 {
+            let settings = UserSettings(context: context)
+            settings.temperatureUnit = "C"
+            settings.windSpeedUnit = "km/h"
+            settings.isDarkMode = false
+            save()
+        }
+    }
+
+    func fetchUserSettings() -> UserSettings {
+        let context = container.viewContext
+        let request: NSFetchRequest<UserSettings> = UserSettings.fetchRequest()
+        guard let settings = (try? context.fetch(request))?.first else {
+            fatalError("UserSettings no disponible en Core Data")
+        }
+        return settings
     }
 }

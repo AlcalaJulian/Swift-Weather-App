@@ -14,8 +14,9 @@ class CitiesListViewModel {
     var cities: [CityDto] = []
     var filteredCities: [CityDto] = []
     private let _context: CoreDataStack = CoreDataStack.shared
+    private let coreData = CoreDataStack.shared
+    var searchHistory: [SearchHistoryItem] = []
     
-
     func loadCities() {
         cities = fetchLocalCities(search: "")
     }
@@ -32,6 +33,20 @@ class CitiesListViewModel {
                 }
             }
     }
+    func saveSearch(query: String) {
+          coreData.saveSearch(query: query)
+          loadHistory()
+      }
+
+      func loadHistory() {
+          searchHistory = coreData.fetchSearchHistory()
+      }
+      
+    func deleteHistoryItems(at offsets: IndexSet) {
+        let items = offsets.map { searchHistory[$0] }
+        items.forEach { coreData.deleteHistoryItem($0) }
+        loadHistory()
+    }
 
     func fetchRemoteCities(for query: String) -> [CityDto] {
         let forecast: Forecast = loadJSON(filename: "forecast_scheme")
@@ -44,7 +59,6 @@ class CitiesListViewModel {
     
     func fetchLocalCities(search: String) -> [CityDto] {
         let request: NSFetchRequest<City> = City.fetchRequest()
-//        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         if !search.isEmpty{
             request.predicate = NSPredicate(format: "cityName CONTAINS[cd] %@", search)

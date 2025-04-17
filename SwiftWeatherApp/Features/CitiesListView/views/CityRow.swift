@@ -40,7 +40,7 @@ struct CityRowContentView: View {
     let maxTemp: Double
     let minTemp: Double
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject private var settings: SettingsStore
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
@@ -56,14 +56,13 @@ struct CityRowContentView: View {
             Spacer()
             
             VStack(alignment: .trailing, spacing: 4) {
-                Text("\(firstTemp, specifier: "%.0f")°")
-                    .font(.system(size: 48))
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                
-                Text("Máx: \(maxTemp, specifier: "%.0f")°  •  Mín: \(minTemp, specifier: "%.0f")°")
-                    .font(.system(size: 14))
-                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
-            }
+                Text(settings.temp(firstTemp))
+                               .font(.system(size: 48))
+                               .foregroundColor(colorScheme == .dark ? .white : .black)
+                Text("Máx: \(settings.temp(maxTemp))  •  Mín: \(settings.temp(minTemp))")
+                               .font(.system(size: 14))
+                               .foregroundColor(colorScheme == .dark ? .white.opacity(0.85) : .black.opacity(0.85))
+                       }
             .padding(.trailing, 16)
         }
         .padding(.vertical, 16)

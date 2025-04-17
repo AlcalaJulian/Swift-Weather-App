@@ -30,8 +30,8 @@ class CityDetailViewModel: ObservableObject {
         city.getCurrentWeatherHour()
     }
     
-    var currentTemperature: String {
-        "\(Int(currentWeather?.temperature ?? 0))°"
+    var currentTemperature: Double {
+        Double(currentWeather?.temperature ?? Int(0.0))
     }
     
     var currentCondition: String {
@@ -54,12 +54,18 @@ class CityDetailViewModel: ObservableObject {
         Array(city.weather.dropFirst())
     }
     
-    func temperatureRange(from temperatures: [Int]) -> String {
-        guard let maxTemp = temperatures.max(), let minTemp = temperatures.min() else {
-            return ""
+    func temperatureRange(
+            from temps: [Int],
+            unit: TemperatureUnit = .c       
+        ) -> String {
+            guard let max = temps.max(), let min = temps.min() else { return "" }
+
+            func convert(_ c: Int) -> Int {
+                unit == .c ? c : Int(round(Double(c) * 9/5 + 32))
+            }
+            let symbol = unit == .c ? "°C" : "°F"
+            return "Máx: \(convert(max))\(symbol) • Mín: \(convert(min))\(symbol)"
         }
-        return "Max: \(maxTemp)°C - Min: \(minTemp)°C"
-    }
     
     func getConditionIcon(for condition: String) -> Image {
         switch condition.lowercased() {

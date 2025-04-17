@@ -9,6 +9,8 @@ import SwiftUI
 struct HourlyWeatherScrollView: View {
     //@State var viewModel: CityDetailViewModel
     @State var hourlyWeather: [HourlyWeatherDto]
+    @EnvironmentObject private var settings: SettingsStore
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
@@ -17,7 +19,7 @@ struct HourlyWeatherScrollView: View {
                         Text(hourlyWeather.hour)
                             .font(.caption)
                             .bold()
-                        Text("\(hourlyWeather.temperature)°C")
+                        Text("\(settings.temp(Double(hourlyWeather.temperature)))")
                             .font(.title3)
                         hourlyWeather.getConditionIcon()
                             .resizable()
@@ -34,7 +36,7 @@ struct HourlyWeatherScrollView: View {
                         HStack(spacing: 5) {
                             Image(systemName: "wind")
                                 .font(.caption2)
-                            Text("\(hourlyWeather.windSpeed) km/h")
+                            Text(settings.wind(Double(hourlyWeather.windSpeed)))
                                 .font(.caption2)
                         }
                     }
