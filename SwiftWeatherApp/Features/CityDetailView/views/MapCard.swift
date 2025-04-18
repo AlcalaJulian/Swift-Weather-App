@@ -1,15 +1,13 @@
 import SwiftUI
 
 struct MapCard: View {
-    
+    @EnvironmentObject private var settings: SettingsStore
     var city: CityDto
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 16) {
-                
                 ZStack {
-                    // Gradient background inside the icon box
                     RoundedRectangle(cornerRadius: 12)
                         .fill(
                             LinearGradient(
@@ -20,32 +18,21 @@ struct MapCard: View {
                         )
                         .frame(width: 100, height: 100)
                         .shadow(radius: 4)
-                    
-                    if let temp = city.getCurrentWeatherHour()?.temperature {
-                        Image(systemName: "\(temp).square.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                    } else {
-                        city.getCurrentWeatherHour()?
-                            .getConditionIcon()
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                    }
+
+                    Text(tempString)
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundColor(.white)
                 }
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(city.city)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundStyle(.primary)
-                    
+
                     HStack {
-                        Label("\(city.location.latitude)", systemImage: "location.north.fill")
-                        Label("\(city.location.longitude)", systemImage: "location")
+                        Label("\(city.location.latitude, specifier: "%.2f")", systemImage: "location.north.fill")
+                        Label("\(city.location.longitude, specifier: "%.2f")", systemImage: "location")
                     }
                     .font(.footnote)
                     .foregroundStyle(.secondary)
@@ -60,4 +47,12 @@ struct MapCard: View {
         )
         .padding(.horizontal)
     }
+
+    private var tempString: String {
+        if let current = city.getCurrentWeatherHour() {
+            return settings.temp(Double(current.temperature))
+        }
+        return "--"
+    }
 }
+
