@@ -29,6 +29,5 @@ extension LocationManager{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.last else { return }
         location = newLocation
-        //manager.stopUpdatingLocation()
     }
 }

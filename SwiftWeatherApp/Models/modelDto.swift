@@ -72,11 +72,6 @@ struct HourlyWeatherDto: Codable, Hashable {
     let condition: String
     let humidity: Int
     let windSpeed: Int
-
-//    enum CodingKeys: String, CodingKey {
-//        case hour, temperature, condition, humidity
-//        case windSpeed = "wind_speed" // el json viene así, para no modificar el json coloco esto [Julián]
-//    }
     
     func getConditionIcon() -> Image {
         switch condition.lowercased() {

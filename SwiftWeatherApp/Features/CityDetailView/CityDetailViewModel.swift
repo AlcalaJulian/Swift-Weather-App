@@ -142,7 +142,6 @@ class CityDetailViewModel: ObservableObject {
     }
         
     func removeFromFavorites() async {
-            // Lógica para eliminar la ciudad de favoritos
         
         let cityToDelete = try? _context.container.viewContext.fetch(_context.requestById(UUID(uuidString: city.id)!)).first
         if let toDelete = cityToDelete {

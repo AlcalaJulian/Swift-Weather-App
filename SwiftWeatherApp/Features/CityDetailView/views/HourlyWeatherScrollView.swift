@@ -7,7 +7,6 @@
 
 import SwiftUI
 struct HourlyWeatherScrollView: View {
-    //@State var viewModel: CityDetailViewModel
     @State var hourlyWeather: [HourlyWeatherDto]
     @EnvironmentObject private var settings: SettingsStore
     

@@ -18,7 +18,6 @@ struct MapView: View {
             Annotation(city.city, coordinate: city.getCLLocation()) {
                 if let weather = city.getCurrentWeatherHour() {
                     ZStack {
-                        // Background with blur and rounded corners
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.ultraThinMaterial)
                             .background(.regularMaterial)
