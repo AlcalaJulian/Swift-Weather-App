@@ -11,7 +11,7 @@ struct MapCard: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(
                             LinearGradient(
-                                gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.purple.opacity(0.6)]),
+                                gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.gray.opacity(0.6)]),
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -20,7 +20,7 @@ struct MapCard: View {
                         .shadow(radius: 4)
 
                     Text(tempString)
-                        .font(.system(size: 30, weight: .bold))
+                        .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.white)
                 }
 

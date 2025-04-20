@@ -8,269 +8,35 @@
       },
       "weather": [
         {
-          "day": "2025-02-25",
+          "day": "2025-04-21",
           "hourly": [
             {
               "hour": "00:00",
-              "temperature": 15,
-              "condition": "Sunny",
-              "humidity": 40,
-              "wind_speed": 10
-            },
-            {
-              "hour": "02:00",
-              "temperature": 15,
-              "condition": "Sunny",
-              "humidity": 41,
-              "wind_speed": 10
-            },
-            {
-              "hour": "04:00",
-              "temperature": 15,
-              "condition": "Sunny",
-              "humidity": 42,
-              "wind_speed": 10
-            },
-            {
-              "hour": "06:00",
-              "temperature": 15,
-              "condition": "Sunny",
-              "humidity": 43,
-              "wind_speed": 10
-            },
-            {
-              "hour": "08:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 44,
-              "wind_speed": 10
-            },
-            {
-              "hour": "10:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 45,
-              "wind_speed": 10
-            },
-            {
-              "hour": "12:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 46,
-              "wind_speed": 10
-            },
-            {
-              "hour": "14:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 47,
-              "wind_speed": 10
-            },
-            {
-              "hour": "16:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 48,
-              "wind_speed": 10
-            },
-            {
-              "hour": "18:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 49,
-              "wind_speed": 10
-            },
-            {
-              "hour": "20:00",
-              "temperature": 16,
-              "condition": "Sunny",
-              "humidity": 50,
-              "wind_speed": 10
-            },
-            {
-              "hour": "22:00",
-              "temperature": 5,
-              "condition": "Sunny",
-              "humidity": 51,
-              "wind_speed": 10
-            }
-          ]
-        },
-        {
-          "day": "2025-02-26",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 45,
-              "wind_speed": 12
-            },
-            {
-              "hour": "02:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 46,
-              "wind_speed": 12
-            },
-            {
-              "hour": "04:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 47,
-              "wind_speed": 12
-            },
-            {
-              "hour": "06:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 48,
-              "wind_speed": 12
-            },
-            {
-              "hour": "08:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 49,
-              "wind_speed": 12
-            },
-            {
-              "hour": "10:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 50,
-              "wind_speed": 12
-            },
-            {
-              "hour": "12:00",
-              "temperature": 15,
-              "condition": "Partly Cloudy",
-              "humidity": 51,
-              "wind_speed": 12
-            },
-            {
-              "hour": "14:00",
-              "temperature": 15,
-              "condition": "Partly Cloudy",
-              "humidity": 52,
-              "wind_speed": 12
-            },
-            {
-              "hour": "16:00",
-              "temperature": 15,
-              "condition": "Partly Cloudy",
-              "humidity": 53,
-              "wind_speed": 12
-            },
-            {
-              "hour": "18:00",
-              "temperature": 15,
-              "condition": "Partly Cloudy",
-              "humidity": 54,
-              "wind_speed": 12
-            },
-            {
-              "hour": "20:00",
-              "temperature": 15,
-              "condition": "Partly Cloudy",
-              "humidity": 55,
-              "wind_speed": 12
-            },
-            {
-              "hour": "22:00",
-              "temperature": 14,
-              "condition": "Partly Cloudy",
-              "humidity": 56,
-              "wind_speed": 12
-            }
-          ]
-        },
-        {
-          "day": "2025-02-27",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 16,
-              "condition": "Cloudy",
+              "temperature": 12,
+              "condition": "Clear",
               "humidity": 50,
               "wind_speed": 8
             },
             {
-              "hour": "02:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 51,
-              "wind_speed": 8
-            },
-            {
-              "hour": "04:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 52,
-              "wind_speed": 8
-            },
-            {
               "hour": "06:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 53,
-              "wind_speed": 8
-            },
-            {
-              "hour": "08:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 54,
-              "wind_speed": 8
-            },
-            {
-              "hour": "10:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 55,
-              "wind_speed": 8
-            },
-            {
-              "hour": "12:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 56,
-              "wind_speed": 8
-            },
-            {
-              "hour": "14:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 57,
-              "wind_speed": 8
-            },
-            {
-              "hour": "16:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 58,
-              "wind_speed": 8
-            },
-            {
-              "hour": "18:00",
-              "temperature": 16,
-              "condition": "Cloudy",
-              "humidity": 59,
-              "wind_speed": 8
-            },
-            {
-              "hour": "20:00",
-              "temperature": 16,
+              "temperature": 10,
               "condition": "Cloudy",
               "humidity": 60,
-              "wind_speed": 8
+              "wind_speed": 10
             },
             {
-              "hour": "22:00",
-              "temperature": 15,
-              "condition": "Cloudy",
-              "humidity": 61,
-              "wind_speed": 8
+              "hour": "12:00",
+              "temperature": 18,
+              "condition": "Sunny",
+              "humidity": 40,
+              "wind_speed": 5
+            },
+            {
+              "hour": "18:00",
+              "temperature": 16,
+              "condition": "Partly Cloudy",
+              "humidity": 45,
+              "wind_speed": 7
             }
           ]
         }
@@ -284,269 +50,35 @@
       },
       "weather": [
         {
-          "day": "2025-02-25",
+          "day": "2025-04-21",
           "hourly": [
             {
               "hour": "00:00",
-              "temperature": 19,
+              "temperature": 15,
               "condition": "Clear",
               "humidity": 55,
-              "wind_speed": 5
-            },
-            {
-              "hour": "02:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 54,
-              "wind_speed": 5
-            },
-            {
-              "hour": "04:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 53,
-              "wind_speed": 5
+              "wind_speed": 6
             },
             {
               "hour": "06:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 52,
-              "wind_speed": 5
-            },
-            {
-              "hour": "08:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 51,
-              "wind_speed": 5
-            },
-            {
-              "hour": "10:00",
-              "temperature": 20,
-              "condition": "Sunny",
-              "humidity": 50,
-              "wind_speed": 5
+              "temperature": 14,
+              "condition": "Cloudy",
+              "humidity": 60,
+              "wind_speed": 8
             },
             {
               "hour": "12:00",
-              "temperature": 20,
-              "condition": "Sunny",
-              "humidity": 49,
-              "wind_speed": 5
-            },
-            {
-              "hour": "14:00",
-              "temperature": 20,
-              "condition": "Sunny",
-              "humidity": 48,
-              "wind_speed": 5
-            },
-            {
-              "hour": "16:00",
-              "temperature": 20,
-              "condition": "Sunny",
-              "humidity": 47,
-              "wind_speed": 5
-            },
-            {
-              "hour": "18:00",
-              "temperature": 20,
-              "condition": "Sunny",
-              "humidity": 46,
-              "wind_speed": 5
-            },
-            {
-              "hour": "20:00",
               "temperature": 20,
               "condition": "Sunny",
               "humidity": 45,
               "wind_speed": 5
             },
             {
-              "hour": "22:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 44,
-              "wind_speed": 5
-            }
-          ]
-        },
-        {
-          "day": "2025-02-26",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 50,
-              "wind_speed": 6
-            },
-            {
-              "hour": "02:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 49,
-              "wind_speed": 6
-            },
-            {
-              "hour": "04:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 48,
-              "wind_speed": 6
-            },
-            {
-              "hour": "06:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 47,
-              "wind_speed": 6
-            },
-            {
-              "hour": "08:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 46,
-              "wind_speed": 6
-            },
-            {
-              "hour": "10:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 45,
-              "wind_speed": 6
-            },
-            {
-              "hour": "12:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 44,
-              "wind_speed": 6
-            },
-            {
-              "hour": "14:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 43,
-              "wind_speed": 6
-            },
-            {
-              "hour": "16:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 42,
-              "wind_speed": 6
-            },
-            {
               "hour": "18:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 41,
-              "wind_speed": 6
-            },
-            {
-              "hour": "20:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 40,
-              "wind_speed": 6
-            },
-            {
-              "hour": "22:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 39,
-              "wind_speed": 6
-            }
-          ]
-        },
-        {
-          "day": "2025-02-27",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 40,
-              "wind_speed": 4
-            },
-            {
-              "hour": "02:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 41,
-              "wind_speed": 4
-            },
-            {
-              "hour": "04:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 42,
-              "wind_speed": 4
-            },
-            {
-              "hour": "06:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 43,
-              "wind_speed": 4
-            },
-            {
-              "hour": "08:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 44,
-              "wind_speed": 4
-            },
-            {
-              "hour": "10:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 45,
-              "wind_speed": 4
-            },
-            {
-              "hour": "12:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 46,
-              "wind_speed": 4
-            },
-            {
-              "hour": "14:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 47,
-              "wind_speed": 4
-            },
-            {
-              "hour": "16:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 48,
-              "wind_speed": 4
-            },
-            {
-              "hour": "18:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 49,
-              "wind_speed": 4
-            },
-            {
-              "hour": "20:00",
-              "temperature": 21,
-              "condition": "Sunny",
+              "temperature": 18,
+              "condition": "Partly Cloudy",
               "humidity": 50,
-              "wind_speed": 4
-            },
-            {
-              "hour": "22:00",
-              "temperature": 21,
-              "condition": "Sunny",
-              "humidity": 51,
-              "wind_speed": 4
+              "wind_speed": 7
             }
           ]
         }
@@ -560,268 +92,34 @@
       },
       "weather": [
         {
-          "day": "2025-02-25",
+          "day": "2025-04-21",
           "hourly": [
             {
               "hour": "00:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 50,
-              "wind_speed": 12
-            },
-            {
-              "hour": "02:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 51,
-              "wind_speed": 12
-            },
-            {
-              "hour": "04:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 52,
-              "wind_speed": 12
-            },
-            {
-              "hour": "06:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 53,
-              "wind_speed": 12
-            },
-            {
-              "hour": "08:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 54,
-              "wind_speed": 12
-            },
-            {
-              "hour": "10:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 55,
-              "wind_speed": 12
-            },
-            {
-              "hour": "12:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 56,
-              "wind_speed": 12
-            },
-            {
-              "hour": "14:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 57,
-              "wind_speed": 12
-            },
-            {
-              "hour": "16:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 58,
-              "wind_speed": 12
-            },
-            {
-              "hour": "18:00",
-              "temperature": 23,
-              "condition": "Sunny",
-              "humidity": 59,
-              "wind_speed": 12
-            },
-            {
-              "hour": "20:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 60,
-              "wind_speed": 12
-            },
-            {
-              "hour": "22:00",
-              "temperature": 22,
-              "condition": "Sunny",
-              "humidity": 61,
-              "wind_speed": 12
-            }
-          ]
-        },
-        {
-          "day": "2025-02-26",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 23,
-              "condition": "Partly Cloudy",
-              "humidity": 45,
-              "wind_speed": 10
-            },
-            {
-              "hour": "02:00",
-              "temperature": 23,
-              "condition": "Partly Cloudy",
-              "humidity": 46,
-              "wind_speed": 10
-            },
-            {
-              "hour": "04:00",
-              "temperature": 23,
-              "condition": "Partly Cloudy",
-              "humidity": 47,
-              "wind_speed": 10
-            },
-            {
-              "hour": "06:00",
-              "temperature": 23,
-              "condition": "Partly Cloudy",
-              "humidity": 48,
-              "wind_speed": 10
-            },
-            {
-              "hour": "08:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 49,
-              "wind_speed": 10
-            },
-            {
-              "hour": "10:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 50,
-              "wind_speed": 10
-            },
-            {
-              "hour": "12:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 51,
-              "wind_speed": 10
-            },
-            {
-              "hour": "14:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 52,
-              "wind_speed": 10
-            },
-            {
-              "hour": "16:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 53,
-              "wind_speed": 10
-            },
-            {
-              "hour": "18:00",
-              "temperature": 24,
-              "condition": "Partly Cloudy",
-              "humidity": 54,
-              "wind_speed": 10
-            },
-            {
-              "hour": "20:00",
-              "temperature": 23,
-              "condition": "Rainy",
-              "humidity": 55,
-              "wind_speed": 10
-            },
-            {
-              "hour": "22:00",
-              "temperature": 23,
-              "condition": "Storm",
-              "humidity": 56,
-              "wind_speed": 10
-            }
-          ]
-        },
-        {
-          "day": "2025-02-27",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 24,
-              "condition": "Sunny",
+              "temperature": 18,
+              "condition": "Clear",
               "humidity": 40,
-              "wind_speed": 9
-            },
-            {
-              "hour": "02:00",
-              "temperature": 24,
-              "condition": "Sunny",
-              "humidity": 41,
-              "wind_speed": 9
-            },
-            {
-              "hour": "04:00",
-              "temperature": 24,
-              "condition": "Sunny",
-              "humidity": 42,
-              "wind_speed": 9
+              "wind_speed": 10
             },
             {
               "hour": "06:00",
-              "temperature": 24,
-              "condition": "Sunny",
-              "humidity": 43,
-              "wind_speed": 9
-            },
-            {
-              "hour": "08:00",
-              "temperature": 25,
-              "condition": "Sunny",
-              "humidity": 44,
-              "wind_speed": 9
-            },
-            {
-              "hour": "10:00",
-              "temperature": 25,
-              "condition": "Sunny",
-              "humidity": 45,
-              "wind_speed": 9
+              "temperature": 16,
+              "condition": "Cloudy",
+              "humidity": 50,
+              "wind_speed": 12
             },
             {
               "hour": "12:00",
-              "temperature": 25,
+              "temperature": 24,
               "condition": "Sunny",
-              "humidity": 46,
-              "wind_speed": 9
-            },
-            {
-              "hour": "14:00",
-              "temperature": 25,
-              "condition": "Sunny",
-              "humidity": 47,
-              "wind_speed": 9
-            },
-            {
-              "hour": "16:00",
-              "temperature": 25,
-              "condition": "Sunny",
-              "humidity": 48,
-              "wind_speed": 9
+              "humidity": 30,
+              "wind_speed": 8
             },
             {
               "hour": "18:00",
-              "temperature": 25,
-              "condition": "Sunny",
-              "humidity": 49,
-              "wind_speed": 9
-            },
-            {
-              "hour": "20:00",
-              "temperature": 24,
-              "condition": "Sunny",
-              "humidity": 50,
-              "wind_speed": 9
-            },
-            {
-              "hour": "22:00",
-              "temperature": 24,
-              "condition": "Sunny",
-              "humidity": 51,
+              "temperature": 22,
+              "condition": "Partly Cloudy",
+              "humidity": 35,
               "wind_speed": 9
             }
           ]
@@ -836,268 +134,160 @@
       },
       "weather": [
         {
-          "day": "2025-02-25",
+          "day": "2025-04-21",
           "hourly": [
             {
               "hour": "00:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 60,
-              "wind_speed": 7
-            },
-            {
-              "hour": "02:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 61,
-              "wind_speed": 7
-            },
-            {
-              "hour": "04:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 62,
+              "temperature": 17,
+              "condition": "Clear",
+              "humidity": 45,
               "wind_speed": 7
             },
             {
               "hour": "06:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 63,
-              "wind_speed": 7
-            },
-            {
-              "hour": "08:00",
-              "temperature": 19,
-              "condition": "Sunny",
-              "humidity": 64,
-              "wind_speed": 7
-            },
-            {
-              "hour": "10:00",
-              "temperature": 19,
-              "condition": "Sunny",
-              "humidity": 65,
-              "wind_speed": 7
+              "temperature": 15,
+              "condition": "Cloudy",
+              "humidity": 50,
+              "wind_speed": 9
             },
             {
               "hour": "12:00",
-              "temperature": 19,
+              "temperature": 22,
               "condition": "Sunny",
-              "humidity": 66,
-              "wind_speed": 7
-            },
-            {
-              "hour": "14:00",
-              "temperature": 19,
-              "condition": "Sunny",
-              "humidity": 67,
-              "wind_speed": 7
-            },
-            {
-              "hour": "16:00",
-              "temperature": 19,
-              "condition": "Sunny",
-              "humidity": 68,
-              "wind_speed": 7
+              "humidity": 35,
+              "wind_speed": 6
             },
             {
               "hour": "18:00",
-              "temperature": 19,
-              "condition": "Sunny",
-              "humidity": 69,
-              "wind_speed": 7
-            },
-            {
-              "hour": "20:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 70,
-              "wind_speed": 7
-            },
-            {
-              "hour": "22:00",
-              "temperature": 18,
-              "condition": "Sunny",
-              "humidity": 71,
-              "wind_speed": 7
-            }
-          ]
-        },
-        {
-          "day": "2025-02-26",
-          "hourly": [
-            {
-              "hour": "00:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 55,
-              "wind_speed": 8
-            },
-            {
-              "hour": "02:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 56,
-              "wind_speed": 8
-            },
-            {
-              "hour": "04:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 57,
-              "wind_speed": 8
-            },
-            {
-              "hour": "06:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 58,
-              "wind_speed": 8
-            },
-            {
-              "hour": "08:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 59,
-              "wind_speed": 8
-            },
-            {
-              "hour": "10:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 60,
-              "wind_speed": 8
-            },
-            {
-              "hour": "12:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 61,
-              "wind_speed": 8
-            },
-            {
-              "hour": "14:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 62,
-              "wind_speed": 8
-            },
-            {
-              "hour": "16:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 63,
-              "wind_speed": 8
-            },
-            {
-              "hour": "18:00",
-              "temperature": 20,
-              "condition": "Clear",
-              "humidity": 64,
-              "wind_speed": 8
-            },
-            {
-              "hour": "20:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 65,
-              "wind_speed": 8
-            },
-            {
-              "hour": "22:00",
-              "temperature": 19,
-              "condition": "Clear",
-              "humidity": 66,
-              "wind_speed": 8
-            }
-          ]
-        },
-        {
-          "day": "2025-02-27",
-          "hourly": [
-            {
-              "hour": "00:00",
               "temperature": 20,
               "condition": "Partly Cloudy",
+              "humidity": 40,
+              "wind_speed": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Granada",
+      "location": {
+        "latitude": 37.1773,
+        "longitude": -3.5986
+      },
+      "weather": [
+        {
+          "day": "2025-04-21",
+          "hourly": [
+            {
+              "hour": "00:00",
+              "temperature": 14,
+              "condition": "Clear",
               "humidity": 50,
               "wind_speed": 5
             },
             {
-              "hour": "02:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 51,
-              "wind_speed": 5
-            },
-            {
-              "hour": "04:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 52,
-              "wind_speed": 5
-            },
-            {
               "hour": "06:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 53,
-              "wind_speed": 5
-            },
-            {
-              "hour": "08:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 54,
-              "wind_speed": 5
-            },
-            {
-              "hour": "10:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
+              "temperature": 12,
+              "condition": "Cloudy",
               "humidity": 55,
-              "wind_speed": 5
+              "wind_speed": 7
             },
             {
               "hour": "12:00",
               "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 56,
-              "wind_speed": 5
-            },
-            {
-              "hour": "14:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 57,
-              "wind_speed": 5
-            },
-            {
-              "hour": "16:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 58,
-              "wind_speed": 5
+              "condition": "Sunny",
+              "humidity": 40,
+              "wind_speed": 4
             },
             {
               "hour": "18:00",
-              "temperature": 20,
+              "temperature": 18,
               "condition": "Partly Cloudy",
-              "humidity": 59,
+              "humidity": 45,
+              "wind_speed": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Bilbao",
+      "location": {
+        "latitude": 43.2630,
+        "longitude": -2.9350
+      },
+      "weather": [
+        {
+          "day": "2025-04-21",
+          "hourly": [
+            {
+              "hour": "00:00",
+              "temperature": 13,
+              "condition": "Rainy",
+              "humidity": 70,
+              "wind_speed": 10
+            },
+            {
+              "hour": "06:00",
+              "temperature": 12,
+              "condition": "Cloudy",
+              "humidity": 65,
+              "wind_speed": 8
+            },
+            {
+              "hour": "12:00",
+              "temperature": 16,
+              "condition": "Sunny",
+              "humidity": 50,
+              "wind_speed": 6
+            },
+            {
+              "hour": "18:00",
+              "temperature": 15,
+              "condition": "Partly Cloudy",
+              "humidity": 55,
+              "wind_speed": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Malaga",
+      "location": {
+        "latitude": 36.7213,
+        "longitude": -4.4214
+      },
+      "weather": [
+        {
+          "day": "2025-04-21",
+          "hourly": [
+            {
+              "hour": "00:00",
+              "temperature": 19,
+              "condition": "Clear",
+              "humidity": 50,
               "wind_speed": 5
             },
             {
-              "hour": "20:00",
-              "temperature": 20,
-              "condition": "Partly Cloudy",
-              "humidity": 60,
-              "wind_speed": 5
+              "hour": "06:00",
+              "temperature": 18,
+              "condition": "Cloudy",
+              "humidity": 55,
+              "wind_speed": 6
             },
             {
-              "hour": "22:00",
-              "temperature": 20,
+              "hour": "12:00",
+              "temperature": 25,
+              "condition": "Sunny",
+              "humidity": 40,
+              "wind_speed": 4
+            },
+            {
+              "hour": "18:00",
+              "temperature": 23,
               "condition": "Partly Cloudy",
-              "humidity": 61,
+              "humidity": 45,
               "wind_speed": 5
             }
           ]

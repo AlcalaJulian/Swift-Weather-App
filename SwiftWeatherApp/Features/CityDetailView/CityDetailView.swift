@@ -7,6 +7,7 @@ struct CityDetailView: View {
     
     init(city: CityDto) {
         _viewModel = State(wrappedValue: CityDetailViewModel(city: city))
+        viewModel.saveSearch(cityName: city.city)
     }
     
     var body: some View {

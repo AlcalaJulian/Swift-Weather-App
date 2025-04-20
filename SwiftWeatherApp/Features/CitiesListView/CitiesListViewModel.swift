@@ -14,7 +14,6 @@ class CitiesListViewModel {
     var cities: [CityDto] = []
     var filteredCities: [CityDto] = []
     private let _context: CoreDataStack = CoreDataStack.shared
-    private let coreData = CoreDataStack.shared
     var searchHistory: [SearchHistoryItem] = []
     
     func loadCities() {
@@ -33,18 +32,14 @@ class CitiesListViewModel {
                 }
             }
     }
-    func saveSearch(query: String) {
-          coreData.saveSearch(query: query)
-          loadHistory()
-      }
 
       func loadHistory() {
-          searchHistory = coreData.fetchSearchHistory()
+          searchHistory = _context.fetchSearchHistory()
       }
       
     func deleteHistoryItems(at offsets: IndexSet) {
         let items = offsets.map { searchHistory[$0] }
-        items.forEach { coreData.deleteHistoryItem($0) }
+        items.forEach { _context.deleteHistoryItem($0) }
         loadHistory()
     }
 

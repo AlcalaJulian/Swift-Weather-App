@@ -52,7 +52,6 @@ extension CoreDataStack {
     
     func add(_ city: City) async {
      
-        
         container.viewContext.insert(city)
         
         save()
@@ -71,6 +70,8 @@ extension CoreDataStack {
     }
     func saveSearch(query: String) {
         let context = container.viewContext
+        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        
         let item = SearchHistoryItem(context: context)
         item.id = UUID()
         item.query = query

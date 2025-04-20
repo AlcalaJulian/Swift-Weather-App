@@ -19,6 +19,7 @@ class CityDetailViewModel: ObservableObject {
     
     init(city: CityDto) {
         self.city = city
+        saveSearch(cityName: city.city)
     }
     
     var navigationTitle: String {
@@ -152,4 +153,8 @@ class CityDetailViewModel: ObservableObject {
             city.isFavorite = false
         }
     }
+    
+    func saveSearch(cityName: String) {
+        _context.saveSearch(query: cityName)
+      }
 }
